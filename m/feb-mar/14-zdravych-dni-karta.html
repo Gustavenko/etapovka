@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>14 zdravých dní – karta</title>
+<style>
+  @page { size: A4 portrait; margin: 8mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; margin: 0; font-size: 9pt; }
+  .card { height: 136mm; border: 1px dashed #000; padding: 4mm 5mm; margin-bottom: 4mm; page-break-inside: avoid; }
+  .card:nth-of-type(2n) { page-break-after: always; margin-bottom: 0; }
+  h1 { font-size: 13pt; margin: 0; }
+  .sub { font-size: 8.5pt; margin: 1mm 0 2mm; }
+  .head { display: flex; justify-content: space-between; gap: 4mm; margin-bottom: 2mm; }
+  .head span { flex: 1; border-bottom: 1px solid #000; padding-top: 3mm; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #000; padding: 0.8mm 1mm; text-align: center; }
+  td.r { text-align: left; white-space: nowrap; font-size: 8.5pt; }
+  th { font-size: 8pt; }
+  tr.sec td { background: #ddd; font-weight: bold; text-align: left; font-size: 8pt; }
+  .foot { display: flex; gap: 6mm; margin-top: 2mm; font-size: 8.5pt; }
+  .foot div { flex: 1; border-bottom: 1px solid #000; padding-top: 5mm; }
+</style>
+</head>
+<body>
+<!-- Jedna karta = polovica A4. Vytlačiť toľko strán, koľko je polovica chalanov (14 chalanov = 7 strán). -->
+<script>
+const rows = [
+  ['sec','4 PILIERE (str. 51–52)'],
+  ['r','Spánok: v posteli do 22:00, mobil 2 h pred spaním preč'],
+  ['r','Jedlo: 5× denne, raňajky áno, desiata ovocie'],
+  ['r','Voda: aspoň 1,5 l (sladké nápoje sa nerátajú)'],
+  ['r','Pohyb: aspoň 30 min, zapotil som sa'],
+  ['sec','MODRÝ ŽIVOT (str. 46)'],
+  ['r','Ráno 15 min cvičenia (alebo tímová rozcvička)'],
+  ['r','Zuby ráno aj večer'],
+  ['r','Studená voda (sprcha podľa str. 52)'],
+  ['r','Ani jedno neslušné slovo'],
+  ['r','Nič nečestné'],
+  ['r','Aspoň jeden dobrý skutok'],
+  ['r','Zažil som niečo radostné'],
+];
+function card(){
+  let days = '';
+  for (let i=1;i<=14;i++) days += `<th>${i}</th>`;
+  let body = '';
+  for (const [t,txt] of rows){
+    if (t==='sec') body += `<tr class="sec"><td colspan="15">${txt}</td></tr>`;
+    else { let c=''; for(let i=0;i<14;i++) c+='<td>&nbsp;</td>'; body += `<tr><td class="r">${txt}</td>${c}</tr>`; }
+  }
+  return `<div class="card">
+    <h1>14 zdravých dní · Bí-Piho rozviedka</h1>
+    <div class="sub">Dva týždne plním Modrý život a snažím sa dodržiavať 4 piliere zdravého života. Každý večer zaškrtni ✓ alebo ✗. Ide o snahu, nie o plný počet. <b>Môj najslabší pilier zakrúžkujem.</b></div>
+    <div class="head"><span>Meno:</span><span>Od:</span><span>Do:</span></div>
+    <table><tr><th style="text-align:left">deň →</th>${days}</tr>${body}</table>
+    <div class="foot"><div>Dátumy sme dohodli (podpis rodiča):</div><div>Splnené (podpis rodiča):</div></div>
+    <div class="sub" style="margin-top:2mm">Kartu prines podpísanú na schôdzku <b>22. 2.</b> Za ňu je pečať do Bí-Piho denníka.</div>
+  </div>`;
+}
+let html=''; for(let i=0;i<2;i++) html+=card();
+document.body.insertAdjacentHTML('beforeend', html);
+</script>
+</body>
+</html>

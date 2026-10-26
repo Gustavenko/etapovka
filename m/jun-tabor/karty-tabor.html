@@ -1,0 +1,143 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8"><title>Karty družinová noc</title>
+<style>
+@page { size: A4 portrait; margin: 10mm; }
+* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; color:#000; background:#fff; margin:0; font-size:9.5pt; }
+.page { width:190mm; min-height:275mm; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.hd { font-size:8pt; border-bottom:1px solid #000; margin-bottom:3mm; padding-bottom:1mm; }
+h2 { font-size:13pt; margin:0 0 2mm; }
+h3 { font-size:10.5pt; margin:0 0 1.5mm; }
+p { margin:0 0 1.5mm; }
+table { border-collapse:collapse; width:100%; }
+th, td { border:1px solid #000; padding:1mm; font-size:8.5pt; vertical-align:top; }
+td.e { height:6.5mm; }
+.c { text-align:center; }
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; }
+.grid3 { display:grid; grid-template-columns: 1fr 1fr 1fr; }
+.card { border:1px dashed #000; padding:3mm; }
+.small { font-size:8.5pt; }
+.box { border:1px solid #000; padding:3mm; margin-bottom:3mm; }
+ol, ul { margin:1mm 0 1mm 5mm; padding:0; }
+li { margin-bottom:0.8mm; }
+.p1 td.e { height:5mm; } .p1 .rot th.v { height:20mm; }
+.rot th.v { writing-mode: vertical-rl; transform: rotate(180deg); height:24mm; font-weight:normal; }
+@media screen { body { background:#eee; } .page { background:#fff; margin:5mm auto; padding:5mm; box-shadow:0 0 3px #999; } }
+</style></head><body>
+
+<!-- 1 -->
+<div class="page p1">
+<div class="hd">Strana 1 · Zborový tábor · Vlajková čata a Nástup (str. 37–39) · <b>dohodnúť so zborom</b> · hornú časť má radca, dolnú odovzdá Matej vodcovi tábora v prvý deň</div>
+<h2>Vlajková čata · zoznam našej družiny</h2>
+<p class="small">Úloha (str. 39): aspoň raz som na tábore členom vlajkovej čaty, vlajku dokážem správne niesť, vztýčiť, sňať a poskladať a viem, aká úcta sa jej preukazuje. Platí, „ak to zvyk oddielu dovoľuje“. Roly ✓ z nácviku 21. 6., služba naostro podľa rozpisu zboru. Ak čata na tábore nebude, splní sa v septembri na akcii so štátnou vlajkou.</p>
+<table class="rot"><tr><th style="width:45mm">Meno</th><th class="v">niesť</th><th class="v">vztýčiť</th><th class="v">sňať</th><th class="v">zložiť do trojuholníka</th><th class="v">otázka o úcte</th><th class="v">služba naostro (deň)</th><th class="v">PEČAŤ</th></tr>
+<tbody id="vc"></tbody></table>
+<p class="small" style="margin-top:2mm"><b>Otázky o úcte:</b> Kedy sa vztyčuje a kedy sníma? (ráno, pred západom slnka) · Čo ešte smie na stožiar? (nič) · Čo keď sa vlajka dotkne zeme? (nesmie) · Kradne sa pri prepade? (nikdy) · Ako stojíš pri vztyčovaní? (pozor, čelom k vlajke, pozdrav)</p>
+
+<h2 style="margin-top:4mm">Nástup · karta pre vodcu tábora</h2>
+<p class="small">Úloha (str. 39): počas všetkých nástupov na tábore sa správam príkladne, mám rovnošatu, stojím v pozore, spievam hymny a poslúcham povely. <b>Potvrdzuje vodca tábora.</b> ✓ v poriadku · ! upozornený · O ospravedlnený. Hodnotí sa snaha, jeden „!“ neznamená koniec. Dni dopíš podľa programu zboru.</p>
+<table class="rot"><tr><th style="width:38mm">Meno</th><th class="v">nástup 1</th><th class="v">2</th><th class="v">3</th><th class="v">4</th><th class="v">5</th><th class="v">6</th><th class="v">7</th><th class="v">8</th><th class="v">9</th><th class="v">10</th><th class="v">záverečný</th><th class="v">POTVRDZUJEM</th></tr>
+<tbody id="nas"></tbody></table>
+<p style="margin-top:2mm">Podpis vodcu tábora: ______________________ &nbsp; Dátum: ____________</p>
+</div>
+
+<!-- 2 -->
+<div class="page">
+<div class="hd">Strana 2 · Družinová noc 20:00 · Skladanie mapy Brownsea · radca spočíta pečate v denníkoch členov, ktorí sú na noci</div>
+<h2>Kusy Bí-Piho mapy · prahy</h2>
+<p class="small"><b>Pravidlo:</b> hliadka dostane kus etapy, keď majú jej členovia na noci spolu aspoň polovicu možných pečatí tej etapy. <b>Prah = polovica na člena × počet členov na noci.</b> Chýbajúci kus sa dá „kúpiť“: 30 drepov alebo pieseň, potom Matej ukáže originál na 30 s.</p>
+<table style="margin-bottom:3mm"><tr><th>Etapa / kus</th><th>Pečatí na člena</th><th>Polovica na člena</th><th>Prah pri 3</th><th>pri 4</th><th>pri 5</th></tr>
+<tr><td>1 Prístav a hrad</td><td class="c">13</td><td class="c">7</td><td class="c">21</td><td class="c">28</td><td class="c">35</td></tr>
+<tr><td>2 Lagúna stôp</td><td class="c">4</td><td class="c">2</td><td class="c">6</td><td class="c">8</td><td class="c">10</td></tr>
+<tr><td>3 Pozorovací vrch</td><td class="c">3</td><td class="c">2</td><td class="c">6</td><td class="c">8</td><td class="c">10</td></tr>
+<tr><td>4 Stará pevnosť</td><td class="c">9</td><td class="c">5</td><td class="c">15</td><td class="c">20</td><td class="c">25</td></tr>
+<tr><td>5 Tábor 1907</td><td class="c">11</td><td class="c">6</td><td class="c">18</td><td class="c">24</td><td class="c">30</td></tr>
+</table>
+<div id="kusy"></div>
+<p class="small"><b>Žolíky (indície z denníka), každý raz na stanovišti s tým istým menom:</b> 1 „Dobrá posádka má vždy jednu dosku v zálohe.“ = 4. kartón · 2 „Kto sa pozerá dlhšie, vidí viac.“ = +1 min · 3 „Zved, ktorého raz zbadali, sa môže ešte raz skryť.“ = prvé zasvietenie sa neráta · 4 „Kadet nosí návod vo vrecku.“ = 30 s karty prvej pomoci · 5 „Bí-Pi nikdy neodchádzal od ohňa bez rezervy.“ = +1 zápalka</p>
+</div>
+
+<!-- 3 -->
+<div class="page">
+<div class="hd">Strana 3 · Družinová noc · skúšobná karta (záverečná skúška, str. 89) · 6 ks na stranu, vytlač 3×</div>
+<div class="grid2" id="skuska"></div>
+</div>
+
+<!-- 4 -->
+<div class="page">
+<div class="hd">Strana 4 · Nočná hra Hliadky na Brownsea · karta hliadky (3 ks + 1 rezerva) a pravidlá Kameňa pre Mateja</div>
+<div id="hliadka"></div>
+<div class="box small"><h3>Pri ohni (Matej): Kameň</h3>
+<ul><li>Hliadka povie písmená S, K, A, U a ukáže skúšobné karty s podpismi zo stanovíšť 1–4. Až potom dostane 6. kus mapy.</li>
+<li>V truhlici pri Kameni je písmeno T (heslo SKAUT), vlajka Mafekingu a balíčky pre všetky hliadky.</li>
+<li>Body na tabuľu regaty: 1. pri Kameni +15, 2. +10, 3. +5. Prvá hliadka berie vlajku Mafekingu na slávnostnú chvíľu.</li>
+<li>22:30 roh 2× dlho = koniec hry. Kto nestihol, Matej mu ukáže Kameň.</li></ul></div>
+</div>
+
+<!-- 5 -->
+<div class="page">
+<div class="hd">Strana 5 · Karty strážcov (podpal pri ohni + stanovištia 1–4) · strihaj, každý strážca svoju</div>
+<div id="stan"></div>
+</div>
+
+<!-- 6 -->
+<div class="page">
+<div class="hd">Strana 6 · Slávnostná chvíľa · hore: „Čo ti ešte chýba“ (radca dáva osobne ešte pred nocou) · dole: „Za čo“ (radca prečíta pri vyhlásení)</div>
+<div class="grid2" id="chyba"></div>
+<div class="grid3" id="zaco" style="margin-top:3mm"></div>
+</div>
+
+<script>
+function rows(id, n, cols){ var s=''; for(var i=0;i<n;i++){ s+='<tr><td class="e"></td>'; for(var j=0;j<cols;j++) s+='<td></td>'; s+='</tr>'; } document.getElementById(id).innerHTML=s; }
+function rep(id, n, html){ var s=''; for(var i=0;i<n;i++) s+=html; document.getElementById(id).innerHTML=s; }
+rows('vc', 14, 7);
+rows('nas', 14, 12);
+
+var k='';
+for (var h=0; h<3; h++){
+ k+='<h3>Hliadka: ______________ &nbsp; členov na noci: ___</h3><table style="margin-bottom:3mm"><tr><th>Kus</th><th>Prah</th><th>Pečatí spolu</th><th>Dostali / kúpili</th></tr>';
+ ['1 Prístav a hrad','2 Lagúna stôp','3 Pozorovací vrch','4 Stará pevnosť','5 Tábor 1907'].forEach(function(e){ k+='<tr><td>'+e+'</td><td class="e"></td><td></td><td></td></tr>'; });
+ k+='</table>';
+}
+document.getElementById('kusy').innerHTML=k;
+
+var sk = '<div class="card small" style="height:88mm"><h3>Skúšobná karta · Noc na Brownsea</h3>'
+ + '<p>Meno: ____________________ &nbsp; Hliadka: ____________</p>'
+ + '<p class="small">Záverečná skúška Prvého skauta (str. 89). Strážca podpíše, keď si výkon spravil <b>so snahou</b>. Výsledok nerozhoduje.</p>'
+ + '<table><tr><th>Kde</th><th>Osobný výkon</th><th style="width:20mm">Podpis</th></tr>'
+ + '<tr><td>5 Tábor 1907 (oheň)</td><td>podpal z ostrova alebo chlpatá palička</td><td class="e"></td></tr>'
+ + '<tr><td>1 Prístav a hrad</td><td>Kimova hra pri baterke</td><td class="e"></td></tr>'
+ + '<tr><td>2 Lagúna stôp</td><td>otázka o detaile scény</td><td class="e"></td></tr>'
+ + '<tr><td>3 Pozorovací vrch</td><td>hlásenie zveda (3 veci)</td><td class="e"></td></tr>'
+ + '<tr><td>4 Stará pevnosť</td><td>úkon prvej pomoci (los)</td><td class="e"></td></tr></table></div>';
+rep('skuska', 6, sk);
+
+var hl = '<div class="box small"><h3>Karta hliadky ____________ · Hliadky na Brownsea</h3>'
+ + '<table><tr><th>Stanovište</th><th>Písmeno</th><th>Podpis strážcu</th><th>Žolík použitý?</th></tr>'
+ + '<tr><td>1 Prístav a hrad</td><td class="e"></td><td></td><td></td></tr><tr><td>2 Lagúna stôp</td><td class="e"></td><td></td><td></td></tr><tr><td>3 Pozorovací vrch</td><td class="e"></td><td></td><td></td></tr><tr><td>4 Stará pevnosť</td><td class="e"></td><td></td><td></td></tr></table>'
+ + '<p style="margin-top:1.5mm">Pravidlá: chodíte spolu, najmenej traja, len v území vyznačenom za svetla. Na stanovišti ste najviac 10 min. Baterku svietite len pod seba. <b>Píšťalka 3× = potrebujeme pomoc.</b> Roh 2× dlho = koniec, všetci k ohňu.</p></div>';
+rep('hliadka', 4, hl);
+
+var st = [
+ ['5 Tábor 1907 · podpal (pri ohni, 20:30)', 'Matej', 'ohnisko, vedro vody, lopatka, zápalky, 2 kolíky so špagátom 40 cm nad zemou, ak zbor dovolí nože: nože a kruh krvi',
+  '<b>Osobne:</b> za 10 min hrsť tenkých vetvičiek ako zápalky, hrsť hrubých ako ceruzka a kôra alebo suchá tráva, roztriedené a suché. Alebo chlpatá palička (sedí sa, reže od seba, len za svetla). <b>Tím:</b> malá hranica, najviac 3 zápalky (žolík +1), prepáliť špagát. Prvá hliadka zapaľuje spoločný oheň.', '—'],
+ ['1 Prístav a hrad', 'radca 1', '3 kartóny (4. pri žolíku), 2 laná a svietielka na „more“ (10 m), 15 drobností pod šatkou, papiere, ceruzky, baterka',
+  '<b>Nalodenie:</b> celá hliadka prejde more len po kartónoch, ktoré si posúva. Kto stúpi do mora, ide celá hliadka od začiatku. <b>Osobne:</b> Kimova hra, 15 vecí, 1 min pozerania pri baterke, potom každý píše sám. Podpíš, ak sa snažil.', 'S'],
+ ['2 Lagúna stôp', 'radca 2', 'lampáš, scéna: blato alebo piesok, dve rôzne topánky, rozsypané orechy, zlomená vetva, šatka na kríku',
+  '<b>Čo sa tu stalo?</b> 3 min prezerania (4 pri žolíku), potom hliadka rozpovie príbeh. Za každú vysvetlenú stopu je bod. <b>Osobne:</b> otočí sa chrbtom a odpovie na jednu otázku o detaile.', 'K'],
+ ['3 Pozorovací vrch', 'Matej alebo rover', 'baterka, rukavička so svietiacou tyčinkou 5 m od strážcu, štart 30 m ďaleko, stopky',
+  '<b>Rukavička v tme:</b> strážca sedí, hliadka sa 6 min prikráda. Na koho zasvieti a povie meno, ide na štart (prvé zasvietenie sa pri žolíku neráta). Len pomaly a plazením, nebeží sa. <b>Osobne:</b> hlásenie zveda, 3 veci, ktoré si cestou všimol.', 'A'],
+ ['4 Stará pevnosť', 'radca 3 („ranený kadet“)', 'lekárnička, „odrenina“ (rúž), 2 šatky na znehybnenie, figurína z PET fľaše z 8. 3., lístky na los, karta prvej pomoci (pri žolíku)',
+  '<b>Kadeti:</b> ošetriť odreninu a znehybniť členok šatkou. <b>Osobne (los):</b> naznačiť Heimlichov alebo Gordonov manéver na figuríne <b>bez stláčania</b>, povedať príznaky dusenia, alebo nahlásiť úraz na 112 (kto volá, kde, čo sa stalo, koľko ranených).', 'U']
+];
+var h='';
+st.forEach(function(s){ h+='<div class="box small"><h3>'+s[0]+' · strážca: '+s[1]+(s[4]!='—'?' · písmeno: '+s[4]:'')+'</h3><p><b>Materiál:</b> '+s[2]+'</p><p>'+s[3]+'</p><p>Max. 10 min na hliadku. Podpíš skúšobné karty za snahu, daj písmeno a pošli hliadku ďalej.</p></div>'; });
+document.getElementById('stan').innerHTML=h;
+
+var ch = '<div class="card small" style="height:62mm"><h3>Čo ti ešte chýba do Prvého skauta</h3>'
+ + '<p>Meno: ____________________</p><p>1. ______________________________</p><p>2. ______________________________</p><p>3. ______________________________</p>'
+ + '<p>Dokonči do: <b>____________</b>. Nášivka a knižka na teba čakajú u vodcu. Odovzdáme ich na: ____________</p><p>Radca: ____________</p></div>';
+rep('chyba', 4, ch);
+rep('zaco', 9, '<div class="card small" style="height:32mm">Meno: ______________<br><b>Za čo:</b><br>____________________________<br>____________________________</div>');
+</script>
+</body></html>

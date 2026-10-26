@@ -1,0 +1,125 @@
+:root {
+  --paper: #f7f1e3; --card: #fffaf0; --ink: #2b2620; --muted: #7a6f60; --line: #e2d6bd;
+  --accent: #8a3b12; --e1: #1f5f8b; --e2: #a0522d; --e3: #6b6b2a; --e4: #8b2b2b; --e5: #2f6b3a;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 "Source Sans 3", system-ui, sans-serif; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+a { color: var(--accent); }
+h1, h2, h3, .brand { font-family: Bitter, Georgia, serif; line-height: 1.2; }
+.muted { color: var(--muted); }
+
+.top { background: var(--ink); color: #f7f1e3; position: sticky; top: 0; z-index: 5; }
+.top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding-top: 10px; padding-bottom: 10px; }
+.brand { color: inherit; text-decoration: none; font-weight: 800; font-size: 18px; display: flex; gap: 8px; align-items: center; }
+.top nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.top nav a { color: #f7f1e3; text-decoration: none; padding: 4px 10px; border-radius: 99px; font-weight: 600; font-size: 15px; }
+.top nav a:hover { background: rgba(255,255,255,.12); }
+
+.hero { padding: 28px 0 8px; }
+.kicker { text-transform: uppercase; letter-spacing: .08em; font-size: 13px; color: var(--muted); margin: 0; font-weight: 700; }
+.hero h1 { font-size: clamp(32px, 7vw, 52px); margin: 6px 0 10px; }
+.lead { font-size: 18px; max-width: 640px; margin: 0 0 16px; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; border: 2px solid var(--accent); }
+.btn.ghost { background: transparent; color: var(--accent); }
+
+.next { margin: 20px 0; background: var(--card); border: 2px solid var(--ink); border-radius: 14px; padding: 16px; box-shadow: 4px 4px 0 var(--ink); }
+.next .lbl { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); }
+.next h2 { margin: 4px 0 6px; font-size: 26px; }
+.next h2 a { color: inherit; text-decoration: none; }
+
+.etnav { display: flex; gap: 6px; overflow-x: auto; padding: 8px 0 4px; margin: 12px 0; scrollbar-width: none; }
+.etnav a { flex: none; color: #fff; text-decoration: none; padding: 6px 12px; border-radius: 99px; font-size: 14px; font-weight: 600; }
+
+.et-bg1 { background: var(--e1); } .et-bg2 { background: var(--e2); } .et-bg3 { background: var(--e3); }
+.et-bg4 { background: var(--e4); } .et-bg5 { background: var(--e5); }
+.et { display: inline-block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 2px 8px; border-radius: 6px; color: #fff; white-space: nowrap; }
+.et1 { background: var(--e1); } .et2 { background: var(--e2); } .et3 { background: var(--e3); } .et4 { background: var(--e4); } .et5 { background: var(--e5); }
+.et-head .et, .planhead .et { background: rgba(255,255,255,.22); }
+
+.etapa { margin: 28px 0; scroll-margin-top: 70px; }
+.et-head { color: #fff; border-radius: 14px 14px 0 0; padding: 16px; }
+.et-head h2 { margin: 6px 0 4px; font-size: 26px; }
+.et-head p { margin: 0; opacity: .95; }
+.et-head .muted { color: inherit; opacity: .75; }
+.obd { font-weight: 700; margin-left: 6px; }
+.cards { background: var(--card); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 14px 14px; }
+.card { display: flex; gap: 14px; padding: 12px 16px; border-top: 1px solid var(--line); color: inherit; text-decoration: none; }
+.card:first-child { border-top: 0; }
+.card:hover { background: #fff; }
+.card.past { opacity: .55; }
+.card.is-next { background: #fff3d6; box-shadow: inset 4px 0 0 var(--accent); }
+.c-date { flex: none; width: 74px; white-space: nowrap; font-weight: 700; font-family: Bitter, Georgia, serif; }
+.c-title { font-weight: 700; font-size: 17px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.chip { font-size: 13px; background: var(--paper); border: 1px solid var(--line); border-radius: 99px; padding: 1px 8px; }
+.tag { font-size: 12px; background: var(--ink); color: #fff; border-radius: 6px; padding: 1px 6px; vertical-align: 2px; font-weight: 600; }
+
+.crumbs { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 16px 0; }
+.print { font: inherit; font-weight: 700; background: var(--card); border: 2px solid var(--ink); border-radius: 10px; padding: 6px 12px; cursor: pointer; }
+.planhead { color: #fff; border-radius: 14px; padding: 18px 16px; }
+.planhead h1 { margin: 4px 0 8px; font-size: clamp(26px, 6vw, 38px); }
+.ph-date { font-weight: 700; opacity: .9; }
+.et-name { font-weight: 600; margin-left: 4px; }
+.mats { margin: 16px 0; background: var(--card); border: 1px dashed var(--accent); border-radius: 14px; padding: 12px 16px; }
+.mats h2 { font-size: 16px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+a.mat { display: inline-block; margin: 2px 6px 2px 0; padding: 3px 10px; background: #fff; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; }
+.mats a.mat { display: block; margin: 4px 0; }
+.doc a.mat { display: inline; padding: 1px 6px; margin: 0; font-size: 15px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+.doc { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 4px 18px 16px; margin: 16px 0; overflow-wrap: anywhere; }
+.doc h1 { font-size: 28px; } .doc h2 { font-size: 22px; margin-top: 28px; border-bottom: 2px solid var(--line); padding-bottom: 4px; }
+.doc h3 { font-size: 18px; margin-top: 20px; }
+.doc ul, .doc ol { padding-left: 22px; }
+.doc li.chk { list-style: none; margin-left: -22px; padding-left: 28px; position: relative; }
+.box { position: absolute; left: 0; top: 3px; width: 18px; height: 18px; border: 2px solid var(--ink); border-radius: 4px; font-size: 13px; line-height: 14px; text-align: center; }
+.doc blockquote { margin: 12px 0; padding: 8px 14px; border-left: 4px solid var(--accent); background: var(--paper); border-radius: 0 8px 8px 0; }
+.doc code { background: var(--paper); padding: 0 4px; border-radius: 4px; font-size: .9em; }
+.tbl { overflow-x: auto; margin: 12px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+th { background: var(--paper); }
+.plan table td:first-child { white-space: nowrap; font-weight: 700; }
+.ulohy td.links a { white-space: nowrap; margin-right: 4px; }
+
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 20px 0; }
+.pager a { max-width: 48%; font-weight: 600; }
+.pager a:last-child { text-align: right; }
+
+.pagetitle { margin: 24px 0 8px; font-size: 32px; }
+.matsec { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 4px 16px 10px; margin: 16px 0; scroll-margin-top: 70px; }
+.matsec li { margin: 4px 0; }
+.foot { color: var(--muted); font-size: 13px; padding-top: 24px; padding-bottom: 32px; }
+
+@media (max-width: 560px) {
+  .top nav a { padding: 3px 8px; font-size: 14px; }
+  .c-date { width: 66px; font-size: 15px; }
+  .doc { padding: 2px 12px 12px; }
+  table { font-size: 14px; }
+  /* tabuľky v pláne na mobile ako kartičky: čas + čo na prvom riadku, zvyšok pod tým */
+  .plan .tbl { overflow: visible; }
+  .plan table, .plan tbody, .plan tr, .plan td { display: block; width: auto; }
+  .plan thead { display: none; }
+  .plan tr { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; margin: 8px 0; background: #fff; }
+  .plan td { border: 0; padding: 2px 0; }
+  .plan td:first-child { display: inline; color: var(--accent); margin-right: 6px; }
+  .plan td:nth-child(2) { display: inline; font-weight: 700; }
+  .plan td:nth-child(4) { color: var(--muted); font-size: 13px; }
+}
+
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body { background: #fff; font-size: 11pt; }
+  .top, .crumbs, .pager, .foot, .etnav, .btns, .next { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .planhead, .et-head { background: none !important; color: #000; border: 2px solid #000; padding: 8px 12px; }
+  .et, .et-head .et, .planhead .et { background: none; color: #000; border: 1px solid #000; }
+  .doc, .mats, .cards, .matsec { border: 0; padding: 0; background: none; }
+  .mats a.mat { display: inline; border: 0; padding: 0; }
+  a { color: #000; text-decoration: none; }
+  th { background: #eee; }
+  tr, li, .card { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+}

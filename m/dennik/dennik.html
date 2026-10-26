@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bí-Piho denník</title>
+<style>
+  /* Tlač: A4 naležato, obojstranne, otáčať po KRATŠEJ strane. 4 hárky = 16 strán A5.
+     Hárky polož na seba v poradí 1–4, prelož v polovici a zošij v strede (2 svorky). */
+  @page { size: A4 landscape; margin: 0; }
+  :root {
+    --ink: #1d1a16;
+    --soft: #6b645a;
+    --faint: #b9b1a3;
+    --paper: #f4ecda;
+    --pagebg: #fbf6ea;
+    --hand: "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: #d9cfba; color: var(--ink); font-family: var(--serif); font-size: 9.6pt; line-height: 1.38; }
+
+  /* ---------- obrazovka ---------- */
+  .bar { position: sticky; top: 0; z-index: 5; background: #2b261f; color: #f4ecda; padding: 10px 16px; font: 14px/1.4 -apple-system, "Helvetica Neue", Arial, sans-serif; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .bar button { font: inherit; padding: 5px 12px; border-radius: 6px; border: 1px solid #f4ecda; background: transparent; color: inherit; cursor: pointer; }
+  .bar button.on { background: #f4ecda; color: #2b261f; }
+  .bar .warn { color: #ffb3a1; font-weight: 600; }
+  .view { padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .spread, .sheet { display: flex; box-shadow: 0 3px 14px rgba(0,0,0,.25); }
+  .sheet { position: relative; }
+  .sheet::after { content: attr(data-label); position: absolute; top: -16px; left: 0; font: 11px -apple-system, Arial, sans-serif; color: #4a4339; }
+  #print { display: none; }
+  body.mode-print #read { display: none; }
+  body.mode-print #print { display: flex; }
+
+  /* ---------- strana A5 ---------- */
+  .pg { width: 148.5mm; height: 210mm; overflow: hidden; position: relative; background: var(--pagebg);
+        padding: 10mm 10mm 9mm; display: flex; flex-direction: column; }
+  .spread .pg + .pg, .sheet .pg + .pg { border-left: 1px dashed #c9bfa9; }
+  .pg.over { outline: 3px solid #d0342c; outline-offset: -3px; }
+  .folio { position: absolute; bottom: 4.5mm; font-size: 7.5pt; color: var(--soft); font-style: italic; }
+  .pg.even .folio { left: 10mm; } .pg.odd .folio { right: 10mm; }
+
+  /* ručne kreslené rámčeky: obrys je pseudo-element s jemne „roztraseným“ SVG filtrom */
+  .rough { position: relative; }
+  .rough::before { content: ""; position: absolute; inset: 0; border: 1.3px solid var(--ink); border-radius: 3px 5px 2px 4px; filter: url(#rough); pointer-events: none; }
+  .rough.dbl::after { content: ""; position: absolute; inset: 1.6mm; border: .6px solid var(--ink); border-radius: 2px; filter: url(#rough2); pointer-events: none; }
+
+  h1, h2, h3 { font-weight: normal; margin: 0; }
+  .kicker { font-size: 7.5pt; letter-spacing: .22em; text-transform: uppercase; color: var(--soft); }
+  .hand { font-family: var(--hand); }
+  p { margin: 0 0 2mm; }
+
+  /* ---------- titulka ---------- */
+  .cover { justify-content: space-between; text-align: center; padding: 9mm; }
+  .cover .frame { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 9mm 8mm 7mm; }
+  .cover h1 { font-size: 30pt; line-height: 1.05; margin-top: 3mm; letter-spacing: .01em; }
+  .cover .sub { font-style: italic; font-size: 11pt; margin-top: 2mm; }
+  .cover svg.rose { width: 52mm; height: 52mm; margin: 6mm 0 5mm; }
+  .fields { width: 100%; text-align: left; margin-top: auto; }
+  .field { display: flex; align-items: flex-end; gap: 2mm; margin-top: 3.2mm; font-size: 9pt; }
+  .field b { font-weight: normal; font-variant: small-caps; letter-spacing: .05em; white-space: nowrap; }
+  .field span { flex: 1; border-bottom: 1px dotted var(--ink); height: 5.5mm; }
+  .cover .note { font-size: 7.5pt; color: var(--soft); margin-top: 4mm; font-style: italic; }
+
+  /* ---------- úvod ---------- */
+  .intro h2 { font-size: 15pt; margin: 1mm 0 3mm; }
+  .intro ol { margin: 0 0 3mm; padding-left: 5mm; }
+  .intro li { margin-bottom: 2.4mm; font-size: 10pt; }
+  .legend { display: grid; grid-template-columns: auto 1fr; gap: 1mm 3mm; font-size: 8.6pt; padding: 3mm 4mm; margin-top: auto; }
+  .legend .k { font-weight: bold; text-align: center; border: 1px solid var(--ink); border-radius: 50%; width: 5.5mm; height: 5.5mm; line-height: 5.3mm; font-size: 7.5pt; }
+  .gold { text-align: center; font-style: italic; margin-top: 3mm; font-size: 9pt; }
+
+  table.pts { width: 100%; border-collapse: collapse; margin: 1mm 0 3mm; font-size: 9pt; }
+  table.pts td { padding: 1.4mm 1.5mm; border-bottom: 1px dotted var(--soft); vertical-align: top; }
+  table.pts td.n { text-align: right; white-space: nowrap; font-weight: bold; font-size: 10.5pt; }
+  .route { display: grid; grid-template-columns: 9mm 1fr auto auto; gap: 1.2mm 2.5mm; align-items: center; font-size: 8.6pt; padding: 3mm 4mm; margin-top: auto; }
+  .route svg { width: 8mm; height: 8mm; }
+  .route .box { width: 4.2mm; height: 4.2mm; border: 1px solid var(--ink); display: inline-block; vertical-align: middle; }
+  .small { font-size: 8pt; color: var(--soft); }
+
+  /* ---------- etapa ---------- */
+  .ehead { display: flex; gap: 3.5mm; align-items: center; padding: 3mm 4mm; margin-bottom: 3.5mm; }
+  .ehead svg { width: 15mm; height: 15mm; flex: none; }
+  .ehead h2 { font-size: 15.5pt; line-height: 1.1; }
+  .ehead .when { font-size: 8.3pt; font-style: italic; color: var(--soft); }
+  .story { text-align: justify; hyphens: auto; }
+  .story::first-letter { font-size: 2.4em; float: left; line-height: .9; margin: .5mm 1.2mm 0 0; }
+  .motto { text-align: center; font-family: var(--hand); font-size: 11pt; margin: 2mm 0 3.5mm; }
+  .motto small { display: block; font-family: var(--serif); font-size: 7.5pt; color: var(--soft); font-style: italic; }
+  .lines { flex: 1; min-height: 12mm; display: flex; flex-direction: column; }
+  .lines .lab { font-size: 7.8pt; color: var(--soft); font-style: italic; }
+  .lines .ruled { flex: 1; background: repeating-linear-gradient(to bottom, transparent 0, transparent 6.6mm, var(--faint) 6.6mm, var(--faint) 6.9mm); }
+  .rhead { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1.2px solid var(--ink); padding-bottom: 1mm; margin-bottom: 3mm; }
+  .rhead h3 { font-size: 12pt; font-variant: small-caps; letter-spacing: .04em; }
+  .rhead span { font-size: 8pt; color: var(--soft); font-style: italic; }
+
+  .seals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.6mm; margin-bottom: 3mm; }
+  .seals.c4 { grid-template-columns: repeat(4, 1fr); gap: 2mm; }
+  .seals.c4 .ring { width: 21mm; height: 21mm; }
+  .seal { height: 47mm; padding: 2.2mm 2mm 1.8mm; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .seal .t { font-weight: bold; font-size: 7.9pt; line-height: 1.15; text-transform: uppercase; letter-spacing: .03em; min-height: 6.2mm; display: flex; align-items: center; }
+  .seal .m { font-size: 6.6pt; color: var(--soft); font-style: italic; line-height: 1.2; }
+  .seal .ring { width: 23mm; height: 23mm; border: 1px dashed var(--faint); border-radius: 50%; margin: 1.4mm 0 1.2mm; display: flex; align-items: center; justify-content: center; font-size: 6.5pt; color: var(--faint); letter-spacing: .2em; text-transform: uppercase; }
+  .seal .sig { width: 100%; margin-top: auto; border-top: 1px dotted var(--ink); font-size: 6.2pt; color: var(--soft); padding-top: .4mm; line-height: 1.1; }
+  .seal .star { font-size: 6.4pt; color: var(--soft); }
+
+  .unlock { display: flex; align-items: center; gap: 3mm; padding: 2.4mm 3.5mm; font-size: 8.2pt; margin-top: auto; }
+  .unlock .ring { flex: none; width: 13mm; height: 13mm; border: 1px dashed var(--soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--hand); font-size: 12pt; }
+
+  /* ---------- mapa ---------- */
+  .mappg { padding: 0; }
+  .mappg svg { width: 148.5mm; height: 210mm; display: block; }
+  .maptext { font-family: var(--serif); }
+
+  /* ---------- zadná strana ---------- */
+  .final h2 { font-size: 15pt; text-align: center; margin: 2mm 0 1mm; }
+  .final .chk { display: grid; grid-template-columns: 6mm 1fr; gap: 2mm 2mm; margin: 3mm 0 4mm; font-size: 9pt; }
+  .final .chk i { width: 4.5mm; height: 4.5mm; border: 1px solid var(--ink); display: block; margin-top: .6mm; }
+  .final .chal { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; margin-top: 2mm; }
+  .final .chal div { padding: 2.5mm 3mm; font-size: 8.4pt; min-height: 15mm; }
+
+  @media print {
+    body { background: #fff; }
+    .bar, #read { display: none !important; }
+    #print { display: block !important; padding: 0; }
+    .view { padding: 0; gap: 0; }
+    .sheet { box-shadow: none; width: 297mm; height: 210mm; break-after: page; page-break-after: always; }
+    .sheet::after { display: none; }
+    .pg { background: #fff; width: 148.5mm; }
+    .sheet .pg + .pg { border-left: 0; }
+    .pg.over { outline: none; }
+  }
+</style>
+</head>
+<body class="mode-read">
+
+<!-- spoločné SVG: filtre na roztrasené čiary a symboly etáp -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-3%" y="-3%" width="106%" height="106%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" scale="2.6"/>
+    </filter>
+    <filter id="rough2" x="-3%" y="-3%" width="106%" height="106%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" seed="2"/>
+      <feDisplacementMap in="SourceGraphic" scale="1.6"/>
+    </filter>
+    <pattern id="fog" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="3" stroke="#c4bba9" stroke-width=".35"/>
+    </pattern>
+    <!-- 1 jachta Koh-i-noor -->
+    <symbol id="s1" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M5 27 H35 L31 32.5 H9 Z"/><path d="M20 4 V27"/><path d="M21.5 6 L32 25 H21.5 Z"/><path d="M18.5 9 L9.5 25 H18.5 Z"/>
+      <path d="M3 36.5 q3 -2 6 0 t6 0 t6 0 t6 0 t6 0 t5 0"/><path d="M20 4 l4 1.6 l-4 1.6"/></g></symbol>
+    <!-- 2 stopa kopyta -->
+    <symbol id="s2" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+      <path d="M9 33 C4 20 9 7 20 7 C31 7 36 20 31 33 L25.5 33 C28 23 26 14 20 14 C14 14 12 23 14.5 33 Z"/></g>
+      <g fill="currentColor"><circle cx="9.6" cy="24" r="1"/><circle cx="11.2" cy="16.5" r="1"/><circle cx="15.6" cy="10.8" r="1"/><circle cx="24.4" cy="10.8" r="1"/><circle cx="28.8" cy="16.5" r="1"/><circle cx="30.4" cy="24" r="1"/></g></symbol>
+    <!-- 3 rukavička -->
+    <symbol id="s3" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M12 37 L12 23 L8.4 16 Q7.6 13 10 12.6 Q12 12.4 13.2 15 L15 19 L15 8 Q15 5.4 17 5.4 Q19 5.4 19 8 L19.2 17.5 L19.6 5 Q19.6 3 21.6 3 Q23.6 3 23.6 5 L23.5 17.5 L24 7 Q24 5 26 5 Q28 5 28 7 L27.6 19 L28.6 11.5 Q29 9.4 30.6 9.8 Q32.2 10.2 31.9 12.2 L30.2 26 Q29.4 32 27 37 Z"/>
+      <path d="M11 33.5 H28.4"/><path d="M15 25 q2 1.6 4 0"/></g></symbol>
+    <!-- 4 bicykel kadetov z Mafekingu -->
+    <symbol id="s4" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <circle cx="9.5" cy="27" r="7"/><circle cx="30.5" cy="27" r="7"/><circle cx="9.5" cy="27" r="1" fill="currentColor"/><circle cx="30.5" cy="27" r="1" fill="currentColor"/>
+      <path d="M9.5 27 L16.5 16.5 H27.5 L30.5 27"/><path d="M16.5 16.5 L20 27 L27.5 16.5"/><path d="M20 27 H9.5"/>
+      <path d="M14 13.5 H19"/><path d="M16.5 13.5 V16.5"/><path d="M27.5 16.5 L26.4 11.5 L30 10.5"/></g></symbol>
+    <!-- 5 roh antilopy kudu -->
+    <symbol id="s5" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M5.5 35 Q3 16 21 9 Q29 6 36 4 Q31 9.5 23.5 12.5 Q11 18.5 11.5 35 Z"/>
+      <path d="M5.5 35 H11.5"/><path d="M6 28 L11.3 27"/><path d="M6.6 21.5 L12.4 21.8"/><path d="M9.4 15.6 L14.6 17.6"/><path d="M14 11.5 L18.6 14.4"/><path d="M19.5 9.4 L23 12.4"/><path d="M25.5 7.6 L28 10.2"/></g></symbol>
+    <!-- veterná ružica -->
+    <symbol id="rose" viewBox="-50 -50 100 100"><g fill="none" stroke="currentColor" stroke-linejoin="round">
+      <circle r="44" stroke-width=".8"/><circle r="8" stroke-width=".8"/>
+      <path d="M0 -33 L6 -6 L0 0 L-6 -6 Z M0 33 L6 6 L0 0 L-6 6 Z M33 0 L6 6 L0 0 L6 -6 Z M-33 0 L-6 6 L0 0 L-6 -6 Z" stroke-width="1"/>
+      <path d="M0 -33 L0 0 L-6 -6 Z M0 33 L0 0 L6 6 Z M33 0 L0 0 L6 -6 Z M-33 0 L0 0 L-6 6 Z" fill="currentColor" stroke-width="1"/>
+      <path d="M21 -21 L4 -2 L0 0 L2 -4 Z M-21 21 L-4 2 L0 0 L-2 4 Z M21 21 L2 4 L0 0 L4 2 Z M-21 -21 L-2 -4 L0 0 L-4 -2 Z" stroke-width=".8"/></g>
+      <g fill="currentColor" font-family="Georgia,serif" font-size="9" text-anchor="middle"><text y="-35.5">S</text><text y="41.5">J</text><text x="39" y="3.2">V</text><text x="-39" y="3.2">Z</text></g></symbol>
+  </defs>
+</svg>
+
+<div class="bar" id="bar">
+  <b>Bí-Piho denník</b>
+  <button id="bRead" class="on">Čítanie (dvojstrany)</button>
+  <button id="bPrint">Tlačové hárky</button>
+  <button onclick="window.print()">Tlačiť</button>
+  <span>A4 naležato · obojstranne, otáčať po <b>kratšej</b> strane · mierka 100 % · bez okrajov · 4 hárky na denník</span>
+  <span id="warn" class="warn"></span>
+</div>
+
+<div class="view" id="read"></div>
+<div class="view" id="print"></div>
+
+<!-- ===================== STRANY V PORADÍ ČÍTANIA ===================== -->
+<div id="pages" hidden>
+
+<!-- 1 · titulka -->
+<section class="pg cover">
+  <div class="frame rough dbl">
+    <div class="kicker">Lodný denník · 2026/27</div>
+    <h1>Bí-Piho<br>denník</h1>
+    <div class="sub">Po stopách Bí-Piho – od jachty Koh-i-noor<br>až na ostrov Brownsea</div>
+    <svg class="rose"><use href="#rose"/></svg>
+    <div class="fields">
+      <div class="field"><b>Skaut</b><span></span></div>
+      <div class="field"><b>Posádka (tím)</b><span></span></div>
+      <div class="field"><b>Funkcia na palube</b><span></span></div>
+      <div class="field"><b>Radca posádky</b><span></span></div>
+      <div class="field"><b>Družina / oddiel</b><span></span></div>
+    </div>
+    <div class="note">Nájdený denník vráť, prosím, do klubovne. Jeho majiteľ bez neho nedopláva.</div>
+  </div>
+</section>
+
+<!-- 2 · ako denník funguje -->
+<section class="pg intro">
+  <div class="kicker">Skôr než vyplávaš</div>
+  <h2>Ako denník funguje</h2>
+  <ol>
+    <li>Celý rok pôjdeš <b>po stopách Bí-Piho</b>: od chlapca na jachte až po prvý skautský tábor na ostrove Brownsea. Cesta má <b>5 etáp</b> a každá má v denníku svoju dvojstranu.</li>
+    <li>Každý rámček je jedna <b>úloha Prvého skauta</b>. Je v ňom presný názov z príručky a strana, kde úlohu nájdeš.</li>
+    <li>Keď úlohu splníš, radca ti dá do rámčeka <b>pečať etapy</b> a podpíše sa. Rovnako si ju odškrtni aj v príručke.</li>
+    <li>Keď sú všetky rámčeky etapy plné, <b>odomkneš diel mapy</b> ostrova Brownsea na konci denníka. Radca ti doň dá pečať a zapíše indíciu.</li>
+    <li>Na <b>družinovej noci</b> v júni sa z vašich denníkov poskladá mapa ostrova. Odomknuté diely odkryjú vašej posádke cestu vo <b>finále</b>.</li>
+    <li>Niečo ti ušlo? <b>Nevzdávať sa!</b> Úlohu dobehneš neskôr, najneskôr 21. 6., a pečať dostaneš aj vtedy.</li>
+    <li>Denník nos na <b>každú schôdzku</b>. Bez denníka sa pečať nedáva, len zapíše a dolepí.</li>
+  </ol>
+  <div class="legend rough">
+    <span class="k">V</span><span>hodnotí <b>radca</b> alebo vodca</span>
+    <span class="k">J</span><span>hodnotíš sa <b>sám</b>, pečať potom dá radca</span>
+    <span class="k">R</span><span>potvrdí <b>rodič</b> podpisom v rámčeku, pečať dá radca</span>
+    <span class="k">*</span><span>len pod dozorom radcu, rovera alebo vodcu</span>
+  </div>
+  <div class="gold">„Dôležitá je snaha, nie výsledky.“<br><span class="small">zlaté pravidlo, príručka str. 11</span></div>
+  <div class="folio">2</div>
+</section>
+
+<!-- 3 · body pre posádku -->
+<section class="pg intro">
+  <div class="kicker">Regata posádok</div>
+  <h2>Body pre tvoju posádku</h2>
+  <p>Každá pečať v tvojom denníku pomáha celej posádke. Radca body zapisuje na tabuľu v klubovni.</p>
+  <table class="pts">
+    <tr><td>Pečať za splnenú úlohu (aj dobehnutú)</td><td class="n">+1</td></tr>
+    <tr><td>Odomknutý diel mapy (máš všetky pečate etapy)</td><td class="n">+2</td></tr>
+    <tr><td><b>Plná posádka:</b> diel tej istej etapy odomkli všetci členovia posádky</td><td class="n">+3</td></tr>
+    <tr><td><b>Bonus dňa:</b> výhra hlavnej hry, fair-play alebo pomoc inej posádke. Najviac 1 bod za schôdzku, dáva radca, ktorý ju vedie.</td><td class="n">+1</td></tr>
+  </table>
+  <p class="small">Body sa nikdy neberú. Ak má posádka menej členov ako ostatné, na konci každej etapy jej za chýbajúceho člena pripíšeme priemer pečatí na člena (zaokrúhlený nadol). Body sa zbierajú do <b>finále na družinovej noci</b>. Posádka, ktorá pred finále vedie, dostane jednu indíciu navyše a finále pridá +15, +10 alebo +5 bodov podľa poradia. Víťaza regaty vyhlásime na konci noci.</p>
+  <div class="route rough">
+    <span></span><b>Etapa</b><span class="small">pečatí</span><span class="small">diel</span>
+    <svg><use href="#s1"/></svg><span>1 · Dobrodružné detstvo <span class="small">nov – dec</span></span><span>&nbsp;/ 13</span><i class="box"></i>
+    <svg><use href="#s2"/></svg><span>2 · Hindský chlapec <span class="small">jan – feb</span></span><span>&nbsp;/ 4</span><i class="box"></i>
+    <svg><use href="#s3"/></svg><span>3 · Prvé pomenovanie skaut <span class="small">mar</span></span><span>&nbsp;/ 3</span><i class="box"></i>
+    <svg><use href="#s4"/></svg><span>4 · Boj o Mafeking <span class="small">apr – máj</span></span><span>&nbsp;/ 11</span><i class="box"></i>
+    <svg><use href="#s5"/></svg><span>5 · Prvý skautský tábor <span class="small">jún + družinová noc</span></span><span>&nbsp;/ 9</span><i class="box"></i>
+  </div>
+  <div class="folio">3</div>
+</section>
+
+<!-- 4–13 · etapy (vyrába skript nižšie) -->
+<section class="pg" data-etapa="1" data-side="L"></section>
+<section class="pg" data-etapa="1" data-side="R"></section>
+<section class="pg" data-etapa="2" data-side="L"></section>
+<section class="pg" data-etapa="2" data-side="R"></section>
+<section class="pg" data-etapa="3" data-side="L"></section>
+<section class="pg" data-etapa="3" data-side="R"></section>
+<section class="pg" data-etapa="4" data-side="L"></section>
+<section class="pg" data-etapa="4" data-side="R"></section>
+<section class="pg" data-etapa="5" data-side="L"></section>
+<section class="pg" data-etapa="5" data-side="R"></section>
+
+<!-- 14–15 · mapa ostrova Brownsea (jedno SVG cez dvojstranu, každá strana ukazuje svoju polovicu) -->
+<section class="pg mappg" data-map="L"></section>
+<section class="pg mappg" data-map="R"></section>
+
+<!-- 16 · zadná strana -->
+<section class="pg final">
+  <div class="kicker" style="text-align:center">Posledný zápis</div>
+  <h2>Prvý skaut</h2>
+  <p style="text-align:center" class="small">Keď sú plné všetky dvojstrany, chýbajú už len základné podmienky (príručka str. 89).</p>
+  <div class="chk">
+    <i></i><span><b>Zákon a sľub</b> – žijem podľa skautského sľubu a zákona v skautskom aj bežnom živote.</span>
+    <i></i><span><b>Dobré meno</b> – robím dobré meno skautskému hnutiu.</span>
+    <i></i><span><b>Účasť</b> – mám dobrú dochádzku na družinovky a akcie.</span>
+    <i></i><span><b>Záverečná skúška</b> – zložil som skúšku, ktorú mi pripravil radca s vodcom.</span>
+  </div>
+  <div class="field"><b>Skúšku som zložil dňa</b><span></span></div>
+  <div class="field"><b>Podpis vodcu</b><span></span></div>
+  <div class="field"><b>Odznak odovzdaný na ohni</b><span></span></div>
+  <p class="small" style="margin-top:5mm">Odomknuté výzvy (celá kategória príručky splnená, str. 46):</p>
+  <div class="chal">
+    <div class="rough"><b>Modrý život</b><br><span class="small">Charakter</span></div>
+    <div class="rough"><b>Uzol dobrého skutku</b><br><span class="small">Služba</span></div>
+    <div class="rough"><b>Tri vrcholy</b><br><span class="small">Zdravie a sila</span></div>
+    <div class="rough"><b>Školský prospech</b><br><span class="small">Schopnosti a zručnosti</span></div>
+  </div>
+  <svg style="width:16mm;height:16mm;margin:auto auto 0;display:block;color:var(--ink)"><use href="#rose"/></svg>
+  <div class="folio">16</div>
+</section>
+
+</div>
+
+<script>
+/* ===================== ETAPY A ÚLOHY =====================
+   Názov úlohy presne podľa príručky Prvý skaut (str. = tlačená strana príručky).
+   h = kto hodnotí podľa príručky (V radca/vodca, J ja sám, R rodič). kedy = podľa hlavného plánu etapovky. */
+const ETAPY = [
+  { n: 1, sym: "s1", nazov: "Dobrodružné detstvo", obdobie: "november – december 2026", kniha: "príbeh v príručke na str. 14",
+    pribeh: "Malého Roberta Baden-Powella doma volali Ste. Keď sa jeho starší bratia vybrali na jachte Koh-i-noor po Temži len s mapou a kompasom, vybojoval si, že pôjde s nimi. Dostal na starosť varenie, ktoré mu vôbec nešlo, no bratov ohromil, keď sám presne zameral cestu kompasom. Na pretekoch regát im pred cieľom praskol stožiar a starší to chceli vzdať. Ste ich však presvedčil pokračovať a do cieľa doplávali za väčšieho potlesku než víťazi.",
+    motto: "„Nevzdávať sa!“", mottoKto: "Ste na regate v Yarmouthe", vlavo: 4,
+    ulohy: [
+      ["Funkcie v tíme", 17, "V", "2. 11. → kontrola 7. 12."],
+      ["Identita", 17, "V", "nášivka od 19. 10."],
+      ["Tik-tak", 19, "V, J", "2. 11. – 11. 1."],
+      ["Kimova hra", 64, "V, J", "2. a 9. 11."],
+      ["Spoza hraníc", 20, "V", "9. 11."],
+      ["Cestná premávka", 45, "V", "16. 11."],
+      ["Mapka mesta", 45, "V, J", "23. 11."],
+      ["Vynovenie klubovne", 61, "V, R", "30. 11."],
+      ["Myšlienky", 21, "V, J", "7. a 14. 12."],
+      ["Článok", 21, "V", "21. 12."],
+      ["Čas vďačnosti", 25, "J", "14. – 28. 12."],
+      ["Malé prekvapenie", 29, "V, J", "21. 12."],
+      ["Rovnaký rozdiel", 29, "J", "21. 12."],
+    ] },
+  { n: 2, sym: "s2", nazov: "Hindský chlapec", obdobie: "január – február 2027", kniha: "príbeh v príručke na str. 30",
+    pribeh: "V Indii sa raz z obhliadky nevrátil vojak aj s koňom. Vojaci, ktorí ho hľadali, stretli v džungli asi dvanásťročného chlapca a ten im presne opísal vysokého jazdca na krívajúcom hnedom koni, hoci ho nikdy nevidel. Všetko vyčítal zo stôp: z odtlačkov kopýt, z cvočkov na topánkach, z odlomeného konárika a z chlpov na kôre stromu. Bí-Pi vtedy pochopil, koľko dokáže chlapec, ktorý sa vie pozorne dívať.",
+    motto: "Kto vie čítať stopy, vidí aj to, čo nevidel.", mottoKto: "", vlavo: 0,
+    ulohy: [
+      ["Legenda, báj a povesť", 33, "J", "11. a 18. 1."],
+      ["Dámy/Gentlemani", 43, "J, R", "25. 1. – 22. 2."],
+      ["Obľúbená odborka", 62, "V, R", "8. 2."],
+      ["14 zdravých dní", 52, "R", "8. – 21. 2."],
+    ] },
+  { n: 3, sym: "s3", nazov: "Prvé pomenovanie skaut", obdobie: "marec 2027", kniha: "príbeh v príručke na str. 48",
+    pribeh: "Na vojenských manévroch v púšti navrhol mladý poručík Baden-Powell oddiel zvedov a dal im meno skauti. S piatimi druhmi sa v noci kryl za každým kameňom a kríkom, až sa s Collinsom doplazil na vrch priamo nad táborom protivníka a odpozoroval jeho plány. Keď neskôr nepriateľský plukovník tvrdil, že tam nikdy nemohli byť, Bí-Pi pokojne povedal, kde pod vrcholom nechal svoju rukavičku ako dôkaz.",
+    motto: "Dobrý zved vidí všetko a jeho nevidí nikto.", mottoKto: "", vlavo: 0,
+    ulohy: [
+      ["Nástenka radosti", 27, "V", "1. 3."],
+      ["Dýchaj!", 79, "V", "8. a 15. 3."],
+      ["Ochranca prírody", 41, "J", "22. 3."],
+    ] },
+  { n: 4, sym: "s4", nazov: "Boj o Mafeking", obdobie: "apríl – máj 2027", kniha: "príbeh v príručke na str. 58",
+    pribeh: "V roku 1899 obkľúčilo mesto Mafeking deväťtisíc Búrov a obrancov bolo len sedemsto. Bí-Pi ich prekabátil lesťou: slamenými vojakmi v zákopoch, delami z plechu a predstieranými mínami. Chlapci z mesta nosili správy a rozkazy aj na najvzdialenejšie stanovištia a pomáhali raneným. Bí-Pi im veril, aj keď vedel, že sa môžu pomýliť.",
+    motto: "„Človek, ktorý nikdy neurobil chybu, nikdy nič neurobil.“", mottoKto: "Bí-Pi chlapcom z Mafekingu", vlavo: 2,
+    ulohy: [
+      ["Uzol", 35, "J", "5. – 26. 4."],
+      ["V zdravom tele", 54, "J", "5. 4. – 2. 5."],
+      ["Film Juraj", 23, "V", "12. a 26. 4."],
+      ["Zdravý duch", 54, "V", "19. 4."],
+      ["Rodinná fotogaléria", 34, "R, J", "3. – 17. 5."],
+      ["Čistá izba", 53, "R", "3. – 31. 5."],
+      ["Rovnošata", 53, "J", "3. – 24. 5."],
+      ["Znalec stromov", 75, "V, J", "10. a 15. 5."],
+      ["Sadič", 75, "V", "výprava 15. 5."],
+      ["Majster noža", 70, "V, R", "10. 5."],
+      ["Vlastný výrobok", 70, "V", "výprava 15. 5."],
+    ] },
+  { n: 5, sym: "s5", nazov: "Prvý skautský tábor", obdobie: "jún 2027 · finále na družinovej noci", kniha: "príbeh v príručke na str. 80",
+    pribeh: "V lete 1907 vyplával Bí-Pi z prístavu Poole s dvadsiatimi dvoma chlapcami na divoký ostrov Brownsea. Boli medzi nimi synovia boháčov aj robotníkov. Rozdelil ich na päťčlenné družiny a každá táborila na svojom území pod vlastným vodcom. Ráno ich budil roh antilopy kudu a nad stanmi viala vlajka Mafekingu. Tam sa zrodil skauting a teraz je na rade vaša posádka.",
+    motto: "V malých družinách je tajomstvo úspechu.", mottoKto: "voľne podľa Bí-Piho", vlavo: 0,
+    ulohy: [
+      ["Mapa", 67, "V, J", "7. 6. + výlet 12. 6."],
+      ["Družinový výlet", 67, "V", "výlet 12. 6."],
+      ["TOP 10", 57, "V", "výpravy 15. 5. a 12. 6."],
+      ["Drevorubač", 77, "V", "výlet 12. 6. *"],
+      ["Štiepky", 77, "V", "výlet 12. 6. *"],
+      ["Ľudské telo", 55, "V", "14. alebo 21. 6."],
+      ["Varúj!", 77, "V", "výlet 12. 6. *, ak sa dá", 1],
+      ["Vlajková čata", 39, "V, J", "tábor zboru, ak to zbor dovolí", 1],
+      ["Nástup", 39, "V", "tábor zboru, ak to zbor dovolí", 1],
+    ] },
+];
+
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+function sealHTML([nazov, str, h, kedy, navyse]) {
+  const kto = h.includes("R") ? "radca · rodič" : "podpis radcu · dátum";
+  return `<div class="seal rough"><div class="t">${esc(nazov)}${navyse ? " ☆" : ""}</div>
+    <div class="m">str. ${str} · ${h}<br>${esc(kedy)}</div>
+    <div class="ring">pečať</div><div class="sig">${kto}</div></div>`;
+}
+
+function fillEtapa(pg) {
+  const e = ETAPY[pg.dataset.etapa - 1];
+  if (pg.dataset.side === "L") {
+    const left = e.ulohy.slice(0, e.vlavo);
+    pg.innerHTML = `
+      <div class="ehead rough dbl"><svg><use href="#${e.sym}"/></svg>
+        <div><div class="kicker">Etapa ${e.n} z 5</div><h2>${e.nazov}</h2><div class="when">${e.obdobie} · ${e.kniha}</div></div></div>
+      <p class="story">${esc(e.pribeh)}</p>
+      <div class="motto">${esc(e.motto)}${e.mottoKto ? `<small>${e.mottoKto}</small>` : ""}</div>
+      ${left.length ? `<div class="seals${left.length === 4 ? " c4" : ""}">${left.map(sealHTML).join("")}</div>` : ""}
+      <div class="lines"><div class="lab">Lodný zápis – čo sa mi v tejto etape podarilo, čo ma bavilo:</div><div class="ruled"></div></div>`;
+  } else {
+    const right = e.ulohy.slice(e.vlavo);
+    const povinne = e.ulohy.filter(u => !u[4]).length;
+    pg.innerHTML = `
+      <div class="rhead"><h3>Pečate etapy ${e.n}</h3><span>${e.ulohy.length} úloh${povinne < e.ulohy.length ? ` · ☆ = ak sa dá, na diel sa nerátajú` : ""}</span></div>
+      <div class="seals">${right.map(sealHTML).join("")}</div>
+      ${right.length < 7 ? `<div class="lines"><div class="lab">Poznámky, dátumy, čo ešte dobehnúť:</div><div class="ruled"></div></div>` : ""}
+      <div class="unlock rough"><div class="ring">${e.n}</div>
+        <div><b>Diel mapy č. ${e.n} je tvoj</b>, keď máš ${povinne < e.ulohy.length ? `všetkých ${povinne} pečatí bez ☆` : `všetkých ${povinne} rámčekov plných`}. Radca ti dá pečať do ${e.n}. dielu ostrova Brownsea na konci denníka a zapíše indíciu.</div></div>`;
+  }
+}
+
+/* ===================== MAPA OSTROVA BROWNSEA =====================
+   Súradnice v mm na celú dvojstranu 297 × 210. Ľavá strana 0–148,5, pravá 148,5–297.
+   Ostrov je zjednodušený, nie presný. Diely: 4 SZ, 5 JZ, 3 stred (ľavá strana), 2 SV, 1 V/JV (pravá strana). */
+const ISLAND = "M26 120 C22 98 38 80 62 75 C84 70 96 58 120 60 C138 62 152 52 174 54 C198 56 212 64 234 66 C256 68 276 82 277 102 C278 120 264 130 248 136 C228 144 214 158 190 160 C166 162 150 152 128 154 C104 156 86 168 62 162 C40 156 30 140 26 120 Z";
+const DIELY = {
+  4: "M0 0 H98 C96 92 98 104 100 116 C80 118 60 114 0 124 Z",
+  5: "M0 124 C60 114 80 118 100 116 C102 150 100 190 98 210 H0 Z",
+  3: "M98 0 H146 C142 60 150 110 144 210 H98 C100 190 102 150 100 116 C98 104 96 92 98 0 Z",
+  2: "M146 0 H297 V104 C250 98 200 112 147 108 C149 70 143 40 146 0 Z",
+  1: "M147 108 C200 112 250 98 297 104 V210 H144 C150 160 146 130 147 108 Z",
+};
+const DOT = 'fill="none" stroke="#1d1a16" stroke-width=".5" stroke-dasharray="1 1.1" stroke-linecap="round" stroke-linejoin="round"';
+function stamp(x, y, n) {
+  return `<g><circle cx="${x}" cy="${y}" r="10.5" fill="#fff" stroke="#1d1a16" stroke-width=".6" stroke-dasharray="1.6 1.2"/>
+    <text x="${x}" y="${y - 1}" text-anchor="middle" font-size="7" font-family="Georgia,serif">${n}</text>
+    <text x="${x}" y="${y + 4.6}" text-anchor="middle" font-size="2.4" letter-spacing=".3" fill="#6b645a">PEČAŤ ETAPY</text></g>`;
+}
+function clue(x, y, n, nazov) {
+  return `<g font-family="Georgia,serif"><rect x="${x}" y="${y}" width="44" height="17" rx="1.2" fill="#fff" stroke="#1d1a16" stroke-width=".5" filter="url(#rough2)"/>
+    <text x="${x + 2.4}" y="${y + 4.6}" font-size="3.3" font-weight="bold">${n} · ${nazov}</text>
+    <text x="${x + 2.4}" y="${y + 9}" font-size="2.6" fill="#6b645a" font-style="italic">indícia (zapíše radca):</text>
+    <line x1="${x + 2.4}" y1="${y + 14.2}" x2="${x + 41.6}" y2="${y + 14.2}" stroke="#6b645a" stroke-width=".3" stroke-dasharray=".8 .8"/></g>`;
+}
+function mapSVG() {
+  return `
+  <!-- more -->
+  <g fill="none" stroke="#b9b1a3" stroke-width=".35">
+    <path d="M10 40 q6 -2.4 12 0 t12 0"/><path d="M40 190 q6 -2.4 12 0 t12 0"/><path d="M200 30 q6 -2.4 12 0 t12 0"/><path d="M226 186 q6 -2.4 12 0 t12 0"/><path d="M120 196 q6 -2.4 12 0 t12 0"/><path d="M118 32 q6 -2.4 12 0 t12 0"/>
+  </g>
+  <path d="${ISLAND}" fill="none" stroke="#1d1a16" stroke-width="3.2" stroke-opacity=".12" transform="translate(0 0)"/>
+  <!-- hmla nad dielmi -->
+  <g clip-path="url(#isl)">
+    ${Object.values(DIELY).map(d => `<path d="${d}" fill="url(#fog)"/>`).join("")}
+    <g fill="none" stroke="#1d1a16" stroke-width=".7" stroke-dasharray="3 2" filter="url(#rough2)">
+      <path d="M98 0 C96 92 98 104 100 116 C102 150 100 190 98 210"/>
+      <path d="M0 124 C60 114 80 118 100 116"/>
+      <path d="M146 0 C143 40 149 70 147 108 C146 130 150 160 144 210"/>
+      <path d="M147 108 C200 112 250 98 297 104"/>
+    </g>
+  </g>
+  <path d="${ISLAND}" fill="none" stroke="#1d1a16" stroke-width="1.1" filter="url(#rough)"/>
+
+  <!-- 4 · Stará pevnosť (SZ) -->
+  <g ${DOT}><path d="M46 92 h22 v14 h-22 z"/><path d="M46 92 v-3 h3 v3 m3 0 v-3 h3 v3 m3 0 v-3 h3 v3 m3 0 v-3 h3 v3"/><path d="M55 106 v-6 h4 v6"/>
+    <path d="M36 104 l3 -8 l3 8 M39 96 v-3 M37 99 h4"/></g>
+  <text x="57" y="84" text-anchor="middle" font-size="4.4" font-family="Georgia,serif" font-style="italic">Stará pevnosť</text>
+  <!-- 5 · Tábor 1907 (JZ) -->
+  <g ${DOT}><path d="M32 149 l7 -11 l7 11 z M39 138 v11"/><path d="M48 153 l7 -11 l7 11 z M55 142 v11"/>
+    <path d="M68 150 v-16 M68 134 h8 l-2 2.5 l2 2.5 h-8"/><path d="M74 157 l3 -3 l3 3 m-6 1 h6"/></g>
+  <text x="46" y="133" text-anchor="middle" font-size="4.4" font-family="Georgia,serif" font-style="italic">Tábor 1907</text>
+  <!-- 3 · Pozorovací vrch (stred) -->
+  <g ${DOT}><ellipse cx="122" cy="108" rx="18" ry="13"/><ellipse cx="122" cy="107" rx="12" ry="8.5"/><ellipse cx="122" cy="106" rx="6" ry="4"/></g>
+  <use href="#s3" x="118" y="102" width="8" height="8" style="color:#1d1a16" opacity=".35"/>
+  <text x="122" y="128" text-anchor="middle" font-size="4.4" font-family="Georgia,serif" font-style="italic">Pozorovací vrch</text>
+  <!-- 2 · Lagúna stôp (SV) -->
+  <g ${DOT}><path d="M196 78 c10 -8 30 -6 34 2 c4 8 -12 14 -24 12 c-10 -2 -16 -8 -10 -14 z"/>
+    <path d="M182 96 l1 -4 m3 4 l1 -4 m3 4 l1 -4"/><path d="M240 92 l1 -5 m2 5 l1 -5"/></g>
+  <g opacity=".4"><use href="#s2" x="168" y="86" width="5" height="5"/><use href="#s2" x="174" y="80" width="5" height="5"/><use href="#s2" x="180" y="76" width="5" height="5"/><use href="#s2" x="236" y="80" width="5" height="5"/></g>
+  <text x="214" y="102" text-anchor="middle" font-size="4.4" font-family="Georgia,serif" font-style="italic">Lagúna stôp</text>
+  <!-- 1 · Prístav a hrad (V) -->
+  <g ${DOT}><path d="M246 118 h8 v-8 h3 v3 h3 v-3 h3 v8 h3 v12 h-20 z"/><path d="M266 128 h24"/><path d="M286 128 v4 M280 128 v4"/></g>
+  <use href="#s1" x="276" y="134" width="11" height="11" opacity=".4"/>
+  <text x="232" y="144" text-anchor="middle" font-size="4.4" font-family="Georgia,serif" font-style="italic">Prístav a hrad</text>
+
+  ${stamp(80, 100, 4)}
+  ${stamp(87, 136, 5)}
+  ${stamp(132, 88, 3)}
+  ${stamp(180, 92, 2)}
+  ${stamp(198, 128, 1)}
+
+  <!-- nadpis a indície -->
+  <g font-family="Georgia,serif">
+    <text x="12" y="20" font-size="3" letter-spacing="1" fill="#6b645a">MAPA · ODOMYKÁ SA ZA ETAPY</text>
+    <text x="12" y="31" font-size="11">Ostrov Brownsea</text>
+    <text x="12" y="38" font-size="3.6" font-style="italic" fill="#6b645a">Poole Harbour, Anglicko · prvý skautský tábor 1907</text>
+  </g>
+  ${clue(12, 46, 4, "Stará pevnosť")}
+  ${clue(12, 180, 5, "Tábor 1907")}
+  ${clue(100, 178, 3, "Pozorovací vrch")}
+  ${clue(238, 18, 2, "Lagúna stôp")}
+  ${clue(238, 178, 1, "Prístav a hrad")}
+  <use href="#rose" x="166" y="12" width="26" height="26" style="color:#1d1a16"/>
+  <g font-family="Georgia,serif" font-size="3.3" fill="#1d1a16">
+    <text x="166" y="178" font-style="italic">Ako na mapu:</text>
+    <text x="166" y="183">• hmla (šrafy) = diel ešte nie je tvoj</text>
+    <text x="166" y="188">• všetky pečate etapy → pečať do kruhu</text>
+    <text x="166" y="193">• potom bodkovanú kresbu obtiahni</text>
+    <text x="166" y="198">  a hmlu vygumuj alebo prečiarkni</text>
+    <text x="166" y="203" fill="#6b645a">• družinová noc = finále s mapou</text>
+  </g>`;
+}
+
+function build() {
+  document.querySelectorAll('#pages [data-etapa]').forEach(fillEtapa);
+  // clipPath musí byť v spoločných defs: kópie strán v skrytom náhľade by ho inak „zobrali“ so sebou
+  document.querySelector('svg defs').insertAdjacentHTML('beforeend', `<clipPath id="isl"><path d="${ISLAND}"/></clipPath>`);
+  const inner = mapSVG();
+  document.querySelectorAll('#pages [data-map]').forEach(pg => {
+    const x = pg.dataset.map === "L" ? 0 : 148.5;
+    pg.innerHTML = `<svg viewBox="${x} 0 148.5 210" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+  });
+  const pages = [...document.querySelectorAll('#pages > .pg')];
+  pages.forEach((p, i) => {
+    const n = i + 1;
+    p.classList.add(n % 2 ? "odd" : "even");
+    if (n > 3 && n < 14 && !p.querySelector('.folio')) p.insertAdjacentHTML('beforeend', `<div class="folio">${n}</div>`);
+  });
+  const N = pages.length; // musí byť násobok 4
+  const clone = n => pages[n - 1].cloneNode(true);
+
+  // čítanie: 1 | 2-3 | 4-5 | ... | 16
+  const read = document.getElementById('read');
+  const spread = (...ns) => { const d = document.createElement('div'); d.className = 'spread'; ns.forEach(n => d.appendChild(clone(n))); read.appendChild(d); };
+  spread(1); for (let n = 2; n < N; n += 2) spread(n, n + 1); spread(N);
+
+  // tlač: hárok i má lícnu stranu [N-2i | 1+2i] a rubovú [2+2i | N-1-2i]
+  const print = document.getElementById('print');
+  for (let i = 0; i < N / 4; i++) {
+    [[N - 2 * i, 1 + 2 * i, "líce"], [2 + 2 * i, N - 1 - 2 * i, "rub"]].forEach(([a, b, side]) => {
+      const s = document.createElement('div'); s.className = 'sheet';
+      s.dataset.label = `Hárok ${i + 1} · ${side} · strany ${a} a ${b}`;
+      s.appendChild(clone(a)); s.appendChild(clone(b)); print.appendChild(s);
+    });
+  }
+  document.getElementById('pages').remove();
+}
+
+function checkOverflow() {
+  const bad = [];
+  document.querySelectorAll('#read .pg').forEach((p, i) => {
+    let over = p.scrollHeight > p.clientHeight + 1;
+    p.querySelectorAll('.seal, .story').forEach(el => { if (el.scrollHeight > el.clientHeight + 1) over = true; });
+    const pr = p.getBoundingClientRect();
+    p.querySelectorAll('.seals, .unlock, .lines, .route, .legend, .chk, .chal').forEach(el => { if (el.getBoundingClientRect().bottom > pr.bottom - 7 * 3.78) over = true; });
+    if (over) { p.classList.add('over'); bad.push(i + 1); }
+  });
+  document.getElementById('warn').textContent = bad.length ? `Preteká: ${bad.join(', ')}` : '';
+  window.__overflow = bad;
+}
+
+build();
+const setMode = m => { document.body.className = 'mode-' + m; bRead.classList.toggle('on', m === 'read'); bPrint.classList.toggle('on', m === 'print'); };
+bRead.onclick = () => setMode('read'); bPrint.onclick = () => setMode('print');
+window.addEventListener('load', checkOverflow);
+</script>
+</body>
+</html>

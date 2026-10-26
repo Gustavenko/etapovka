@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Karty december – január</title>
+<style>
+  @page { size: A4; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Times New Roman", serif; color: #000; background: #fff; margin: 0; font-size: 11pt; }
+  .page { page-break-after: always; padding: 0; }
+  .page:last-child { page-break-after: auto; }
+  h1 { font-size: 13pt; margin: 0 0 3mm; border-bottom: 1px solid #000; padding-bottom: 1mm; }
+  .hint { font-size: 8.5pt; font-style: italic; margin: 0 0 3mm; }
+  .grid { display: grid; gap: 0; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g1 { grid-template-columns: 1fr; }
+  .card { border: 1px dashed #000; padding: 4mm; min-height: 60mm; position: relative; }
+  .card.short { min-height: 42mm; }
+  .card.tall { min-height: 130mm; }
+  .card h2 { font-size: 12pt; margin: 0 0 2mm; text-transform: uppercase; letter-spacing: .5px; }
+  .card .tag { font-size: 8pt; position: absolute; top: 2mm; right: 3mm; }
+  .card p { margin: 0 0 2mm; line-height: 1.3; }
+  /* „čierne“ karty: hrubý rám, aby sa líšili aj bez tlače pozadia */
+  .card.black { border: 4px double #000; }
+  .card.black::before { content: "BÚRKA"; font-size: 8pt; font-weight: bold; position: absolute; top: 2mm; right: 3mm; letter-spacing: 2px; }
+  .line { border-bottom: 1px solid #000; height: 7mm; }
+  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  td, th { border: 1px solid #000; padding: 1.5mm; text-align: left; vertical-align: top; }
+  th { font-weight: bold; }
+  .tight td, .tight th { padding: 0.6mm 1.5mm; }
+  .card.mini { min-height: 34mm; padding: 3mm; }
+  .box { display: inline-block; width: 6mm; height: 6mm; border: 1px solid #000; margin-right: 1mm; vertical-align: middle; }
+  .small { font-size: 9pt; }
+  .center { text-align: center; }
+  .big { font-size: 16pt; font-weight: bold; }
+  @media screen { body { background: #ddd; } .page { background: #fff; width: 210mm; min-height: 297mm; margin: 8mm auto; padding: 10mm; box-shadow: 0 0 4px #888; } }
+</style>
+</head>
+<body>
+
+<!-- ============ 1: 7. 12. PRIHLÁŠKA + ZDRAVOTNÍK + PROVIANT ============ -->
+<div class="page">
+<h1>7. 12. · Prihláška na regatu a skúška posádky</h1>
+<p class="hint">Tlač 1×. Prihlášky (3) dostanú pisári. Kartičky nehôd a grogu má radca u seba a rozdá ich v 15. minúte stavby.</p>
+<div class="grid g1">
+  <div class="card mini" style="min-height:0">
+    <span class="tag">pisár · tím 1</span>
+    <h2 style="font-size:10.5pt;margin-bottom:1mm">Prihláška na regaty v Yarmouthe 1866</h2>
+    <p>Meno lode: ______________________ &nbsp; Motto posádky: ______________________</p>
+    <table class="tight"><tr><th>Funkcia</th><th>Meno</th><th>Čo na lodi urobil(a) dnes</th></tr>
+    <tr><td>kormidelník</td><td></td><td></td></tr><tr><td>navigátor</td><td></td><td></td></tr><tr><td>lodný pisár</td><td></td><td></td></tr><tr><td>felčiar</td><td></td><td></td></tr><tr><td>lodný kuchár</td><td></td><td></td></tr><tr><td>strážca truhly</td><td></td><td></td></tr></table>
+  </div>
+  <div class="card mini" style="min-height:0">
+    <span class="tag">pisár · tím 2</span>
+    <h2 style="font-size:10.5pt;margin-bottom:1mm">Prihláška na regaty v Yarmouthe 1866</h2>
+    <p>Meno lode: ______________________ &nbsp; Motto posádky: ______________________</p>
+    <table class="tight"><tr><th>Funkcia</th><th>Meno</th><th>Čo na lodi urobil(a) dnes</th></tr>
+    <tr><td>kormidelník</td><td></td><td></td></tr><tr><td>navigátor</td><td></td><td></td></tr><tr><td>lodný pisár</td><td></td><td></td></tr><tr><td>felčiar</td><td></td><td></td></tr><tr><td>lodný kuchár</td><td></td><td></td></tr><tr><td>strážca truhly</td><td></td><td></td></tr></table>
+  </div>
+  <div class="card mini" style="min-height:0">
+    <span class="tag">pisár · tím 3</span>
+    <h2 style="font-size:10.5pt;margin-bottom:1mm">Prihláška na regaty v Yarmouthe 1866</h2>
+    <p>Meno lode: ______________________ &nbsp; Motto posádky: ______________________</p>
+    <table class="tight"><tr><th>Funkcia</th><th>Meno</th><th>Čo na lodi urobil(a) dnes</th></tr>
+    <tr><td>kormidelník</td><td></td><td></td></tr><tr><td>navigátor</td><td></td><td></td></tr><tr><td>lodný pisár</td><td></td><td></td></tr><tr><td>felčiar</td><td></td><td></td></tr><tr><td>lodný kuchár</td><td></td><td></td></tr><tr><td>strážca truhly</td><td></td><td></td></tr></table>
+  </div>
+</div>
+<div class="grid g3">
+  <div class="card mini"><span class="tag">felčiar</span><h2>Nehoda na palube!</h2><p>Porezal si sa o ostrý okraj tetrapaku na <b>ukazováku</b>. Krváca to (len naoko).</p><p class="small">Zavolaj felčiara. Kým nepríde, drž prst hore.</p></div>
+  <div class="card mini"><span class="tag">felčiar</span><h2>Nehoda na palube!</h2><p>Pichol si sa špajľou do <b>dlane</b>. Je tam malá ranka a štipľavý pocit.</p><p class="small">Zavolaj felčiara. Nič si z ranky nevyťahuj sám.</p></div>
+  <div class="card mini"><span class="tag">felčiar</span><h2>Nehoda na palube!</h2><p>Nožnice ti spadli na <b>palec na nohe</b>. Bolí to, ale chodiť môžeš.</p><p class="small">Zavolaj felčiara. Sadni si.</p></div>
+  <div class="card mini"><span class="tag">lodný kuchár</span><h2>Lodný grog</h2><p>Kuchár, posádka je smädná. Namiešaj <b>1 odmerku sirupu na 7 odmeriek vody</b> a nalej každému z posádky aj radcovi <b>presne rovnako</b>.</p><p class="small">Radca skontroluje hladiny. Po pití poháre a stôl upraceš ty.</p></div>
+  <div class="card mini"><span class="tag">lodný kuchár</span><h2>Lodný grog</h2><p>Kuchár, posádka je smädná. Namiešaj <b>1 odmerku sirupu na 7 odmeriek vody</b> a nalej každému z posádky aj radcovi <b>presne rovnako</b>.</p><p class="small">Radca skontroluje hladiny. Po pití poháre a stôl upraceš ty.</p></div>
+  <div class="card mini"><span class="tag">lodný kuchár</span><h2>Lodný grog</h2><p>Kuchár, posádka je smädná. Namiešaj <b>1 odmerku sirupu na 7 odmeriek vody</b> a nalej každému z posádky aj radcovi <b>presne rovnako</b>.</p><p class="small">Radca skontroluje hladiny. Po pití poháre a stôl upraceš ty.</p></div>
+</div>
+</div>
+
+<!-- ============ 2: 7. 12. WARINGTONOVA POCHVALA ============ -->
+<div class="page">
+<h1>7. 12. · Waringtonova pochvala</h1>
+<p class="hint">Tlač podľa počtu chalanov (12 na stranu). Každý si vylosuje meno niekoho zo svojej posádky (nie seba) a dokončí vetu. Kartička sa nahlas prečíta a odovzdá.</p>
+<div class="grid g3">
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+  <div class="card short"><h2>Pochvala od kormidelníka</h2><p>Pre: ___________________</p><p>Na palube si bol ohromný, keď</p><div class="line"></div><div class="line"></div><p class="small">Podpis: ___________</p></div>
+</div>
+</div>
+
+<!-- ============ 3: 7. 12. MYŠLIENKY – PRIESKUMNÁ KARTA ============ -->
+<div class="page">
+<h1>7. 12. · Myšlienky: prieskumná karta (domáca úloha do 14. 12.)</h1>
+<p class="hint">Tlač podľa počtu chalanov (2 na stranu). Otázku a možnosti dopíše tím ešte na schôdzke, každý si ju opíše na svoju kartu.</p>
+<div class="grid g2">
+  <div class="card tall" style="min-height:128mm"><span class="tag">MYŠLIENKY · str. 21</span><h2>Prístavný prieskum</h2>
+  <p>Posádka: ____________ &nbsp; Meno: ____________</p>
+  <p><b>Naša otázka:</b></p><div class="line"></div><div class="line"></div>
+  <p class="small">Do 14. 12. sa spýtaj aspoň <b>5 ľudí mimo družiny</b> (rodina, spolužiaci, tréner, suseda). Zapíš odpoveď a jednu vetu, <b>prečo</b> si to myslia.</p>
+  <table><tr><th style="width:30%">Kto (napr. babka, spolužiak)</th><th style="width:20%">Odpoveď</th><th>Prečo</th></tr>
+  <tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr></table>
+  <p class="small" style="margin-top:2mm">Názor, ktorý je <b>iný ako môj</b>, a čomu z neho rozumiem:</p><div class="line"></div>
+  </div>
+  <div class="card tall" style="min-height:128mm"><span class="tag">MYŠLIENKY · str. 21</span><h2>Prístavný prieskum</h2>
+  <p>Posádka: ____________ &nbsp; Meno: ____________</p>
+  <p><b>Naša otázka:</b></p><div class="line"></div><div class="line"></div>
+  <p class="small">Do 14. 12. sa spýtaj aspoň <b>5 ľudí mimo družiny</b> (rodina, spolužiaci, tréner, suseda). Zapíš odpoveď a jednu vetu, <b>prečo</b> si to myslia.</p>
+  <table><tr><th style="width:30%">Kto (napr. babka, spolužiak)</th><th style="width:20%">Odpoveď</th><th>Prečo</th></tr>
+  <tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr></table>
+  <p class="small" style="margin-top:2mm">Názor, ktorý je <b>iný ako môj</b>, a čomu z neho rozumiem:</p><div class="line"></div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 4: 14. 12. UDALOSTI NA MORI + BÚRKA ============ -->
+<div class="page">
+<h1>14. 12. · Regata: Udalosti na mori (biele) a Búrka (čierne)</h1>
+<p class="hint">Tlač 1×, rozstrihaj. Biele karty: rozplavba 2, ťahá sa pri každej značke. Čierne: len finále pri značke 3. Po použití kartu vráť a zamiešaj.</p>
+<div class="grid g3">
+  <div class="card short"><h2>Priaznivý vietor</h2><p>Do ďalšej značky mávajú <b>dvaja</b> veterníci naraz.</p></div>
+  <div class="card short"><h2>Protivietor</h2><p>Kartón dole. Do ďalšej značky veterník len <b>fúka ústami</b>.</p></div>
+  <div class="card short"><h2>Bezvetrie</h2><p>Celá posádka nahlas odpočíta <b>5 sekúnd</b>. Až potom smiete pokračovať.</p></div>
+  <div class="card short"><h2>Muž cez palubu!</h2><p>Najvyšší z posádky dobehne k stene a späť. Kým sa nevráti, loď stojí.</p></div>
+  <div class="card short"><h2>Kotva sa zasekla</h2><p>Celá posádka urobí <b>5 drepov</b>. Potom ďalej.</p></div>
+  <div class="card short"><h2>Zlý kormidelník</h2><p>Veterník do ďalšej značky máva <b>slabšou rukou</b>.</p></div>
+  <div class="card short"><h2>Čajka na stožiari</h2><p>Ďalší úsek máva <b>najmenší</b> z posádky, nech je na rade ktokoľvek.</p></div>
+  <div class="card short"><h2>Čistá voda</h2><p>Nič sa nedeje. Plnou parou vpred!</p></div>
+  <div class="card short black"><h2>Stožiar praskol!</h2><p>Radca vytiahne stožiar. Do <b>60 s</b> ho opravte z náhradnej špajle a pásky. Potom ďalej. Nevzdávať sa!</p></div>
+  <div class="card short black"><h2>Stožiar praskol!</h2><p>Radca vytiahne stožiar. Do <b>60 s</b> ho opravte z náhradnej špajle a pásky. Potom ďalej. Nevzdávať sa!</p></div>
+  <div class="card short black"><h2>Vlna</h2><p>Obrovská vlna. Loď ide späť <b>na značku 2</b>. Nevzdávať sa!</p></div>
+  <div class="card short black"><h2>Plachta do vody</h2><p>Plachtu dole (odlepiť). Do cieľa iba trupom. Mávajte ako blázni. Nevzdávať sa!</p></div>
+</div>
+</div>
+
+<!-- ============ 5: 14. 12. ČAS VĎAČNOSTI ============ -->
+<div class="page">
+<h1>14. 12. · Čas vďačnosti (domáca úloha 14. – 27. 12., vyhodnotenie 11. 1.)</h1>
+<p class="hint">Tlač podľa počtu chalanov (2 na stranu). Nikto okrem teba kartu čítať nemusí. Radcovi 11. 1. ukážeš len odškrtnuté večery, nie čo si písal.</p>
+<div class="grid g1">
+  <div class="card" style="min-height:0"><span class="tag">ČAS VĎAČNOSTI · str. 25</span><h2>Lodný denník večerov</h2>
+  <p class="small">Dva týždne každý večer <b>pol hodiny pred spaním</b>: mobil a počítač vypnuté. Ten čas venuj rodine, dobrej knihe alebo krátkej dumke: <b>čo pekné som dnes zažil, za čo som vďačný a na čo sa teším zajtra</b>. Keď sa to podarí, odškrtni. Keď nie, nevadí, pokračuj ďalší večer. Stačí jedno slovo do riadku.</p>
+  <table class="tight">
+  <tr><th style="width:12%">Večer</th><th style="width:8%">✓</th><th>Za čo som dnes vďačný (stačí slovo)</th></tr>
+  <tr><td>po 14. 12.</td><td></td><td></td></tr><tr><td>ut 15. 12.</td><td></td><td></td></tr><tr><td>st 16. 12.</td><td></td><td></td></tr><tr><td>št 17. 12.</td><td></td><td></td></tr><tr><td>pi 18. 12.</td><td></td><td></td></tr><tr><td>so 19. 12.</td><td></td><td></td></tr><tr><td>ne 20. 12.</td><td></td><td></td></tr><tr><td>po 21. 12.</td><td></td><td></td></tr><tr><td>ut 22. 12.</td><td></td><td></td></tr><tr><td>st 23. 12.</td><td></td><td></td></tr><tr><td>št 24. 12.</td><td></td><td>(Štedrý večer sa ráta, aj keď je dlhší ako pol hodiny 🙂)</td></tr><tr><td>pi 25. 12.</td><td></td><td></td></tr><tr><td>so 26. 12.</td><td></td><td></td></tr><tr><td>ne 27. 12.</td><td></td><td></td></tr>
+  </table>
+  <p class="small" style="margin-top:2mm">Meno: ____________ &nbsp; Sám hodnotím: snažil som sa &nbsp;<span class="box"></span> áno &nbsp;<span class="box"></span> skoro &nbsp;<span class="box"></span> skúsim znova</p>
+  </div>
+  <div class="card" style="min-height:0"><span class="tag">ČAS VĎAČNOSTI · str. 25</span><h2>Lodný denník večerov</h2>
+  <p class="small">Dva týždne každý večer <b>pol hodiny pred spaním</b>: mobil a počítač vypnuté. Ten čas venuj rodine, dobrej knihe alebo krátkej dumke: <b>čo pekné som dnes zažil, za čo som vďačný a na čo sa teším zajtra</b>. Keď sa to podarí, odškrtni. Keď nie, nevadí, pokračuj ďalší večer. Stačí jedno slovo do riadku.</p>
+  <table class="tight">
+  <tr><th style="width:12%">Večer</th><th style="width:8%">✓</th><th>Za čo som dnes vďačný (stačí slovo)</th></tr>
+  <tr><td>po 14. 12.</td><td></td><td></td></tr><tr><td>ut 15. 12.</td><td></td><td></td></tr><tr><td>st 16. 12.</td><td></td><td></td></tr><tr><td>št 17. 12.</td><td></td><td></td></tr><tr><td>pi 18. 12.</td><td></td><td></td></tr><tr><td>so 19. 12.</td><td></td><td></td></tr><tr><td>ne 20. 12.</td><td></td><td></td></tr><tr><td>po 21. 12.</td><td></td><td></td></tr><tr><td>ut 22. 12.</td><td></td><td></td></tr><tr><td>st 23. 12.</td><td></td><td></td></tr><tr><td>št 24. 12.</td><td></td><td>(Štedrý večer sa ráta, aj keď je dlhší ako pol hodiny 🙂)</td></tr><tr><td>pi 25. 12.</td><td></td><td></td></tr><tr><td>so 26. 12.</td><td></td><td></td></tr><tr><td>ne 27. 12.</td><td></td><td></td></tr>
+  </table>
+  <p class="small" style="margin-top:2mm">Meno: ____________ &nbsp; Sám hodnotím: snažil som sa &nbsp;<span class="box"></span> áno &nbsp;<span class="box"></span> skoro &nbsp;<span class="box"></span> skúsim znova</p>
+  </div>
+</div>
+</div>
+
+<!-- ============ 6: 14. 12. MALÉ PREKVAPENIE ============ -->
+<div class="page">
+<h1>14. 12. · Malé prekvapenie (prinesieš 21. 12.)</h1>
+<p class="hint">Tlač podľa počtu chalanov (6 na stranu).</p>
+<div class="grid g2">
+  <div class="card"><span class="tag">MALÉ PREKVAPENIE · str. 29</span><h2>Lodná pošta</h2><p>Priprav pre <b>celú družinu</b> malé prekvapenie, ktorým sa jej zaujímavo poďakuješ za všetko, čo sme spolu zažili.</p><p class="small">Nápady: list pre každého (aj 2 vety), vytlačená družinová fotka v ráme z kartónu, upečený koláč, vlastná pesnička, kreslený komiks z výpravy, vyrobená vec do klubovne. <b>Najviac 2 €.</b> Nie kúpené sladkosti z obchodu, ale niečo od teba.</p><p class="small"><b>Prines 21. 12. zabalené</b> a s lístkom „od koho“ vnútri. Ak 21. 12. nebude schôdzka, prines ho 11. 1.</p></div>
+  <div class="card"><span class="tag">MALÉ PREKVAPENIE · str. 29</span><h2>Lodná pošta</h2><p>Priprav pre <b>celú družinu</b> malé prekvapenie, ktorým sa jej zaujímavo poďakuješ za všetko, čo sme spolu zažili.</p><p class="small">Nápady: list pre každého (aj 2 vety), vytlačená družinová fotka v ráme z kartónu, upečený koláč, vlastná pesnička, kreslený komiks z výpravy, vyrobená vec do klubovne. <b>Najviac 2 €.</b> Nie kúpené sladkosti z obchodu, ale niečo od teba.</p><p class="small"><b>Prines 21. 12. zabalené</b> a s lístkom „od koho“ vnútri. Ak 21. 12. nebude schôdzka, prines ho 11. 1.</p></div>
+  <div class="card"><span class="tag">MALÉ PREKVAPENIE · str. 29</span><h2>Lodná pošta</h2><p>Priprav pre <b>celú družinu</b> malé prekvapenie, ktorým sa jej zaujímavo poďakuješ za všetko, čo sme spolu zažili.</p><p class="small">Nápady: list pre každého (aj 2 vety), vytlačená družinová fotka v ráme z kartónu, upečený koláč, vlastná pesnička, kreslený komiks z výpravy, vyrobená vec do klubovne. <b>Najviac 2 €.</b> Nie kúpené sladkosti z obchodu, ale niečo od teba.</p><p class="small"><b>Prines 21. 12. zabalené</b> a s lístkom „od koho“ vnútri. Ak 21. 12. nebude schôdzka, prines ho 11. 1.</p></div>
+  <div class="card"><span class="tag">MALÉ PREKVAPENIE · str. 29</span><h2>Lodná pošta</h2><p>Priprav pre <b>celú družinu</b> malé prekvapenie, ktorým sa jej zaujímavo poďakuješ za všetko, čo sme spolu zažili.</p><p class="small">Nápady: list pre každého (aj 2 vety), vytlačená družinová fotka v ráme z kartónu, upečený koláč, vlastná pesnička, kreslený komiks z výpravy, vyrobená vec do klubovne. <b>Najviac 2 €.</b> Nie kúpené sladkosti z obchodu, ale niečo od teba.</p><p class="small"><b>Prines 21. 12. zabalené</b> a s lístkom „od koho“ vnútri. Ak 21. 12. nebude schôdzka, prines ho 11. 1.</p></div>
+  <div class="card"><span class="tag">MALÉ PREKVAPENIE · str. 29</span><h2>Lodná pošta</h2><p>Priprav pre <b>celú družinu</b> malé prekvapenie, ktorým sa jej zaujímavo poďakuješ za všetko, čo sme spolu zažili.</p><p class="small">Nápady: list pre každého (aj 2 vety), vytlačená družinová fotka v ráme z kartónu, upečený koláč, vlastná pesnička, kreslený komiks z výpravy, vyrobená vec do klubovne. <b>Najviac 2 €.</b> Nie kúpené sladkosti z obchodu, ale niečo od teba.</p><p class="small"><b>Prines 21. 12. zabalené</b> a s lístkom „od koho“ vnútri. Ak 21. 12. nebude schôdzka, prines ho 11. 1.</p></div>
+  <div class="card"><span class="tag">MALÉ PREKVAPENIE · str. 29</span><h2>Lodná pošta</h2><p>Priprav pre <b>celú družinu</b> malé prekvapenie, ktorým sa jej zaujímavo poďakuješ za všetko, čo sme spolu zažili.</p><p class="small">Nápady: list pre každého (aj 2 vety), vytlačená družinová fotka v ráme z kartónu, upečený koláč, vlastná pesnička, kreslený komiks z výpravy, vyrobená vec do klubovne. <b>Najviac 2 €.</b> Nie kúpené sladkosti z obchodu, ale niečo od teba.</p><p class="small"><b>Prines 21. 12. zabalené</b> a s lístkom „od koho“ vnútri. Ak 21. 12. nebude schôdzka, prines ho 11. 1.</p></div>
+</div>
+</div>
+
+<!-- ============ 7: 11. 1. ROVNAKÝ ROZDIEL ============ -->
+<div class="page">
+<h1>11. 1. · Rovnaký rozdiel: Lodný zoznam</h1>
+<p class="hint">Tlač podľa počtu chalanov (2 na stranu). Ceruzka pre každého.</p>
+<div class="grid g1">
+  <div class="card" style="min-height:0"><span class="tag">ROVNAKÝ ROZDIEL · str. 29</span><h2>Kto je na palube?</h2>
+  <p class="small">Nájdi <b>10 ľudí</b> z oddielu (družina, radcovia, vedúci) a s každým <b>2 veci, ktoré máte spoločné</b>. Nie „obaja máme nos“. Áno: rovnaká veľkosť topánky, súrodenec s rovnakým menom, obaja sme boli na 2 táboroch, obaja neznášame hrášok. <b>Každú vec smieš použiť najviac dvakrát.</b> Podpis = potvrdenie.</p>
+  <table class="tight"><tr><th style="width:5%">#</th><th style="width:22%">Meno</th><th>Spoločná vec 1</th><th>Spoločná vec 2</th><th style="width:13%">Podpis</th></tr>
+  <tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td><td></td></tr><tr><td>6</td><td></td><td></td><td></td><td></td></tr><tr><td>7</td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td><td></td></tr><tr><td>9</td><td></td><td></td><td></td><td></td></tr><tr><td>10</td><td></td><td></td><td></td><td></td></tr></table>
+  <p class="small" style="margin-top:2mm">Najčudnejšia spoločná vec, ktorú som našiel (súťaž o bonus): ____________________________</p>
+  </div>
+  <div class="card" style="min-height:0"><span class="tag">ROVNAKÝ ROZDIEL · str. 29</span><h2>Kto je na palube?</h2>
+  <p class="small">Nájdi <b>10 ľudí</b> z oddielu (družina, radcovia, vedúci) a s každým <b>2 veci, ktoré máte spoločné</b>. Nie „obaja máme nos“. Áno: rovnaká veľkosť topánky, súrodenec s rovnakým menom, obaja sme boli na 2 táboroch, obaja neznášame hrášok. <b>Každú vec smieš použiť najviac dvakrát.</b> Podpis = potvrdenie.</p>
+  <table class="tight"><tr><th style="width:5%">#</th><th style="width:22%">Meno</th><th>Spoločná vec 1</th><th>Spoločná vec 2</th><th style="width:13%">Podpis</th></tr>
+  <tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td><td></td></tr><tr><td>6</td><td></td><td></td><td></td><td></td></tr><tr><td>7</td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td><td></td></tr><tr><td>9</td><td></td><td></td><td></td><td></td></tr><tr><td>10</td><td></td><td></td><td></td><td></td></tr></table>
+  <p class="small" style="margin-top:2mm">Najčudnejšia spoločná vec, ktorú som našiel (súťaž o bonus): ____________________________</p>
+  </div>
+</div>
+</div>
+
+<!-- ============ 8: 11. 1. STOPY – PODOZRIVÍ + ZÁZNAM ============ -->
+<div class="page">
+<h1>11. 1. · Stopy pred kasárňou: karta podozrivých a záznam</h1>
+<p class="hint">Tlač 3× (1 strana na tím). Riešenie je len v stopy-pred-kasarnou.md.</p>
+<div class="grid g1">
+  <div class="card" style="min-height:0">
+  <h2>Hlásenie z kasární, India 1876</h2>
+  <p>Z obhliadky sa nevrátil jeden z piatich vojakov aj s koňom. Zistite podľa stôp, <b>ktorý to bol</b> a <b>kam šiel</b>. Ku každej odpovedi napíšte <b>„lebo…“</b>, ako ten hindský chlapec.</p>
+  <table>
+  <tr><th>Č.</th><th>Meno</th><th>Výška</th><th>Topánka</th><th>Kríva</th><th>Kôň</th><th>Píše rukou</th></tr>
+  <tr><td>1</td><td>vojak Smith</td><td>165 cm</td><td>41</td><td>nie</td><td>hnedý</td><td>pravou</td></tr>
+  <tr><td>2</td><td>vojak Brown</td><td>192 cm</td><td>44</td><td>nie</td><td>hnedý</td><td>ľavou</td></tr>
+  <tr><td>3</td><td>vojak O'Neill</td><td>188 cm</td><td>44</td><td>na pravú</td><td>čierny</td><td>pravou</td></tr>
+  <tr><td>4</td><td>desiatnik Hawkins</td><td>190 cm</td><td>44</td><td>na pravú</td><td>hnedý</td><td>ľavou</td></tr>
+  <tr><td>5</td><td>vojak Patel</td><td>170 cm</td><td>39</td><td>na ľavú</td><td>hnedý</td><td>ľavou</td></tr>
+  </table>
+  </div>
+  <div class="card" style="min-height:0">
+  <h2>Náš záznam</h2>
+  <table>
+  <tr><th style="width:28%">Čo sme zistili</th><th style="width:22%">Odpoveď</th><th>Lebo… (podľa ktorej stopy a ako)</th></tr>
+  <tr><td>Veľkosť topánky</td><td></td><td>&nbsp;<br>&nbsp;</td></tr>
+  <tr><td>Kríva? Na ktorú nohu?</td><td></td><td>&nbsp;<br>&nbsp;</td></tr>
+  <tr><td>Vysoký alebo malý?</td><td></td><td>&nbsp;<br>&nbsp;</td></tr>
+  <tr><td>Farba koňa</td><td></td><td>&nbsp;<br>&nbsp;</td></tr>
+  <tr><td>Pravák alebo ľavák? (bonus)</td><td></td><td>&nbsp;<br>&nbsp;</td></tr>
+  <tr><td>Našli sme pascu?</td><td></td><td>&nbsp;<br>&nbsp;</td></tr>
+  <tr><td><b>Zmizol vojak č.</b></td><td></td><td>&nbsp;<br>&nbsp;</td></tr>
+  </table>
+  <p class="small" style="margin-top:2mm">Keď kapitán nahlási správneho vojaka, dostanete druhú polovicu mapy. Až potom smiete bežať na záchrannú akciu.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============ 9: 11. 1. LEGENDA + 18. 1. POZVÁNKA NA BÁL ============ -->
+<div class="page">
+<h1>11. 1. · Legenda, báj a povesť (do 18. 1.) &nbsp;·&nbsp; 18. 1. · Pozvánka na bál (na 25. 1.)</h1>
+<p class="hint">Tlač podľa počtu chalanov. Horné 4 kartičky rozdaj 11. 1., dolné 4 (pozvánky) 18. 1.</p>
+<div class="grid g2">
+  <div class="card"><span class="tag">LEGENDA, BÁJ A POVESŤ · str. 33</span><h2>Príbeh do podpalubia</h2><p>Na lodi do Indie sa večery krátia príbehmi. Do 18. 1. <b>nájdi jednu slovenskú legendu, báj alebo povesť</b>, ktorá ťa zaujala (kniha povestí doma, v knižnici, od starých rodičov, internet).</p><p class="small">Nauč sa ju <b>povedať za 2 minúty</b> vlastnými slovami. Zapíš si: názov · kde sa to stalo (mesto, hrad, vrch) · odkiaľ ju máš. Najlepšie sú strašidelné a čudné.</p></div>
+  <div class="card"><span class="tag">LEGENDA, BÁJ A POVESŤ · str. 33</span><h2>Príbeh do podpalubia</h2><p>Na lodi do Indie sa večery krátia príbehmi. Do 18. 1. <b>nájdi jednu slovenskú legendu, báj alebo povesť</b>, ktorá ťa zaujala (kniha povestí doma, v knižnici, od starých rodičov, internet).</p><p class="small">Nauč sa ju <b>povedať za 2 minúty</b> vlastnými slovami. Zapíš si: názov · kde sa to stalo (mesto, hrad, vrch) · odkiaľ ju máš. Najlepšie sú strašidelné a čudné.</p></div>
+  <div class="card"><span class="tag">LEGENDA, BÁJ A POVESŤ · str. 33</span><h2>Príbeh do podpalubia</h2><p>Na lodi do Indie sa večery krátia príbehmi. Do 18. 1. <b>nájdi jednu slovenskú legendu, báj alebo povesť</b>, ktorá ťa zaujala (kniha povestí doma, v knižnici, od starých rodičov, internet).</p><p class="small">Nauč sa ju <b>povedať za 2 minúty</b> vlastnými slovami. Zapíš si: názov · kde sa to stalo (mesto, hrad, vrch) · odkiaľ ju máš. Najlepšie sú strašidelné a čudné.</p></div>
+  <div class="card"><span class="tag">LEGENDA, BÁJ A POVESŤ · str. 33</span><h2>Príbeh do podpalubia</h2><p>Na lodi do Indie sa večery krátia príbehmi. Do 18. 1. <b>nájdi jednu slovenskú legendu, báj alebo povesť</b>, ktorá ťa zaujala (kniha povestí doma, v knižnici, od starých rodičov, internet).</p><p class="small">Nauč sa ju <b>povedať za 2 minúty</b> vlastnými slovami. Zapíš si: názov · kde sa to stalo (mesto, hrad, vrch) · odkiaľ ju máš. Najlepšie sú strašidelné a čudné.</p></div>
+  <div class="card short center"><p class="small">Kancelária miestokráľa Indie</p><p class="big">POZVÁNKA NA BÁL</p><p>pondelok 25. 1. · klubovňa</p><p class="small">Úbor: rovnošata alebo košeľa. Gentleman príde včas, pozdraví, usmeje sa a skautovi podá ľavú ruku. Kto nie, čistí kone.</p></div>
+  <div class="card short center"><p class="small">Kancelária miestokráľa Indie</p><p class="big">POZVÁNKA NA BÁL</p><p>pondelok 25. 1. · klubovňa</p><p class="small">Úbor: rovnošata alebo košeľa. Gentleman príde včas, pozdraví, usmeje sa a skautovi podá ľavú ruku. Kto nie, čistí kone.</p></div>
+  <div class="card short center"><p class="small">Kancelária miestokráľa Indie</p><p class="big">POZVÁNKA NA BÁL</p><p>pondelok 25. 1. · klubovňa</p><p class="small">Úbor: rovnošata alebo košeľa. Gentleman príde včas, pozdraví, usmeje sa a skautovi podá ľavú ruku. Kto nie, čistí kone.</p></div>
+  <div class="card short center"><p class="small">Kancelária miestokráľa Indie</p><p class="big">POZVÁNKA NA BÁL</p><p>pondelok 25. 1. · klubovňa</p><p class="small">Úbor: rovnošata alebo košeľa. Gentleman príde včas, pozdraví, usmeje sa a skautovi podá ľavú ruku. Kto nie, čistí kone.</p></div>
+</div>
+</div>
+
+<!-- ============ 10: 25. 1. BÁL – SITUÁCIE ============ -->
+<div class="page">
+<h1>25. 1. · Gentlemanský súboj: situácie</h1>
+<p class="hint">Tlač 1×, rozstrihaj. Prvých 8 je normálnych, posledné 4 (s hviezdičkou) sú absurdné, ťahajú sa v 3. kole.</p>
+<div class="grid g3">
+  <div class="card short"><h2>Nový skaut</h2><p>Na výprave stretneš skauta z iného oddielu, ktorého nepoznáš. Predstav sa mu.</p></div>
+  <div class="card short"><h2>Babka kamaráta</h2><p>Prídeš ku kamarátovi domov a otvorí ti jeho babka. Kamarát ešte nie je hotový.</p></div>
+  <div class="card short"><h2>Nový vodca</h2><p>Na oddielovke ti predstavia nového vodcu oddielu. Je dospelý a vidíš ho prvýkrát.</p></div>
+  <div class="card short"><h2>Výťah</h2><p>Nastúpiš do výťahu, kde stojí suseda s plnými taškami. Ide na 7. poschodie, ty na 3.</p></div>
+  <div class="card short"><h2>Pri stole u kamoša</h2><p>Na obede u kamaráta ti jeho mama dá jedlo, ktoré neznášaš.</p></div>
+  <div class="card short"><h2>Oneskorený príchod</h2><p>Meškáš na schôdzku 10 minút. Všetci sedia v kruhu a radca práve hovorí.</p></div>
+  <div class="card short"><h2>Telefón cudziemu</h2><p>Musíš zavolať trénerovi, ktorého si nikdy nevidel, a ospravedlniť sa z tréningu.</p></div>
+  <div class="card short"><h2>Ľavá ruka</h2><p>Stretneš skauta, ale v ľavej ruke držíš horúci čaj a v pravej batoh.</p></div>
+  <div class="card short"><h2>* Miestokráľ</h2><p>Predstavuješ sa miestokráľovi Indie. Práve si zistil, že máš v ústach žuvačku.</p></div>
+  <div class="card short"><h2>* Kráľovná a tiger</h2><p>Na bále tancuješ s kráľovnou a do sály vbehne tiger. Zachovaj sa ako gentleman.</p></div>
+  <div class="card short"><h2>* Kôň pri stole</h2><p>Na slávnostnú večeru omylom prišiel aj tvoj kôň a sedí vedľa generála.</p></div>
+  <div class="card short"><h2>* Miska s citrónom</h2><p>Pred hosťom je miska vody s citrónom na opláchnutie prstov a on z nej práve pije.</p></div>
+</div>
+</div>
+
+<!-- ============ 11: 25. 1. DÁMY/GENTLEMANI – KARTA ============ -->
+<div class="page">
+<h1>25. 1. · Dámy/Gentlemani (domáca úloha 26. 1. – 21. 2., vyhodnotenie 22. 2.)</h1>
+<p class="hint">Tlač podľa počtu chalanov (2 na stranu). Hodnotí J (ja sám) a R (rodič).</p>
+<div class="grid g1">
+  <div class="card" style="min-height:130mm"><span class="tag">DÁMY/GENTLEMANI · str. 43</span><h2>Gentlemanský preukaz</h2>
+  <p class="small">Štyri týždne: <b>pri predstavení sa a stretnutí sa vždy pozdravím a usmejem. Skautovi hneď podám ľavú ruku.</b> Každú nedeľu si sám zaznač, ako sa ti darilo. Rodič na konci podpíše, či to videl aj on.</p>
+  <table>
+  <tr><th>Týždeň</th><th>Pozdravil som a usmial sa (susedia, učitelia, v obchode, pri návšteve)</th><th>Skautovi ľavú ruku</th><th>Najťažšia situácia týždňa</th></tr>
+  <tr><td>26. 1. – 1. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  <tr><td>2. 2. – 8. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  <tr><td>9. 2. – 15. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  <tr><td>16. 2. – 21. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  </table>
+  <p class="small" style="margin-top:3mm">Meno: ____________________</p>
+  <p class="small"><b>Pre rodiča:</b> Úloha je zo Skautského chodníka (príručka Prvý skaut, str. 43). Stačí, ak podpíšete, že ste za posledný mesiac videli snahu zdraviť a usmievať sa. Dôležitá je snaha, nie dokonalosť.</p>
+  <p class="small">Podpis rodiča: ____________________ &nbsp; Dátum: __________</p>
+  </div>
+  <div class="card" style="min-height:130mm"><span class="tag">DÁMY/GENTLEMANI · str. 43</span><h2>Gentlemanský preukaz</h2>
+  <p class="small">Štyri týždne: <b>pri predstavení sa a stretnutí sa vždy pozdravím a usmejem. Skautovi hneď podám ľavú ruku.</b> Každú nedeľu si sám zaznač, ako sa ti darilo. Rodič na konci podpíše, či to videl aj on.</p>
+  <table>
+  <tr><th>Týždeň</th><th>Pozdravil som a usmial sa (susedia, učitelia, v obchode, pri návšteve)</th><th>Skautovi ľavú ruku</th><th>Najťažšia situácia týždňa</th></tr>
+  <tr><td>26. 1. – 1. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  <tr><td>2. 2. – 8. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  <tr><td>9. 2. – 15. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  <tr><td>16. 2. – 21. 2.</td><td><span class="box"></span>vždy <span class="box"></span>väčšinou <span class="box"></span>málo</td><td><span class="box"></span>áno <span class="box"></span>zabudol</td><td>&nbsp;</td></tr>
+  </table>
+  <p class="small" style="margin-top:3mm">Meno: ____________________</p>
+  <p class="small"><b>Pre rodiča:</b> Úloha je zo Skautského chodníka (príručka Prvý skaut, str. 43). Stačí, ak podpíšete, že ste za posledný mesiac videli snahu zdraviť a usmievať sa. Dôležitá je snaha, nie dokonalosť.</p>
+  <p class="small">Podpis rodiča: ____________________ &nbsp; Dátum: __________</p>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

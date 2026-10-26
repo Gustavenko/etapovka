@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="sk"><head><meta charset="utf-8"><title>Kadetský preukaz a karta</title><style>
+  @page { size: A4; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Times New Roman", serif; color: #000; background: #fff; margin: 0; font-size: 11pt; }
+  .page { page-break-after: always; padding: 0; }
+  .page:last-child { page-break-after: auto; }
+  h1 { font-size: 13pt; margin: 0 0 3mm; border-bottom: 1px solid #000; padding-bottom: 1mm; }
+  .hint { font-size: 8.5pt; font-style: italic; margin: 0 0 3mm; }
+  .grid { display: grid; gap: 0; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g1 { grid-template-columns: 1fr; }
+  .card { border: 1px dashed #000; padding: 4mm; min-height: 60mm; position: relative; }
+  .card.short { min-height: 42mm; }
+  .card.tall { min-height: 130mm; }
+  .card h2 { font-size: 12pt; margin: 0 0 2mm; text-transform: uppercase; letter-spacing: .5px; }
+  .card .tag { font-size: 8pt; position: absolute; top: 2mm; right: 3mm; }
+  .card p { margin: 0 0 2mm; line-height: 1.3; }
+  /* „čierne“ karty: hrubý rám, aby sa líšili aj bez tlače pozadia */
+  .card.black { border: 4px double #000; }
+  .card.black::before { content: "BÚRKA"; font-size: 8pt; font-weight: bold; position: absolute; top: 2mm; right: 3mm; letter-spacing: 2px; }
+  .line { border-bottom: 1px solid #000; height: 7mm; }
+  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  td, th { border: 1px solid #000; padding: 1.5mm; text-align: left; vertical-align: top; }
+  th { font-weight: bold; }
+  .tight td, .tight th { padding: 0.8mm 1.5mm; }
+  .card.mini { min-height: 34mm; padding: 3mm; }
+  .box { display: inline-block; width: 6mm; height: 6mm; border: 1px solid #000; margin-right: 1mm; vertical-align: middle; }
+  .small { font-size: 9pt; }
+  .center { text-align: center; }
+  .big { font-size: 16pt; font-weight: bold; }
+  @media screen { body { background: #ddd; } .page { background: #fff; width: 210mm; min-height: 297mm; margin: 8mm auto; padding: 10mm; box-shadow: 0 0 4px #888; } }
+
+  .half { height: 128mm; border: 1px dashed #000; padding: 5mm; margin-bottom: 4mm; overflow: hidden; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .preukaz { border: 2px solid #000; padding: 3mm; height: 58mm; }
+  .stamp { display:inline-block; width: 22mm; height: 22mm; border: 1px solid #000; margin: 1mm 1mm 0 0; font-size: 7.5pt; text-align:center; padding-top: 15mm; }
+  table.days td { padding: 0.6mm 1.5mm; height: 4.6mm; font-size: 8.5pt; }
+</style></head><body>
+<div class="page"><h1>5. 4. · Kadetské preukazy (8 na stranu)</h1>
+<p class="hint">Tlač podľa počtu chalanov (2 strany = 16 ks), rozstrihať po čiarach. Pečiatky dávajú radcovia na stanovištiach A, B a C.</p>
+<div class="cols"><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div><div class="preukaz">
+<div class="center small">MAFEKING · OKTÓBER 1899 → APRÍL 2027</div>
+<div class="center big">KADETSKÝ PREUKAZ</div>
+<p class="small">Meno kadeta: ______________________ &nbsp; Posádka: __________</p>
+<span class="stamp">A · Uzol</span><span class="stamp">B · Kuriér</span><span class="stamp">C · Kondícia</span>
+<p class="small" style="margin-top:2mm">Kadet je zapísaný v zbore, keď má 3 pečiatky. Podpis radcu: ____________</p>
+</div></div></div>
+<div class="page"><p class="hint">Kadetská karta: tlač túto stranu a nasledujúcu obojstranne (otáčať po krátkej strane), 1 hárok = 2 karty, rozstrihnúť napoly. Ak tlačiareň nevie obojstranne, zlep strany chrbtom.</p><div class="half">
+<h1>Kadetská karta · strana 1 · Denný rozkaz (5. – 25. 4.)</h1>
+<p class="small"><b>Meno:</b> ______________________ &nbsp; <b>Odovzdať:</b> 26. 4. radcovi</p>
+<p class="small">Denný príkaz skauta: <b>Každý deň dobrý skutok!</b> Ráno si uviaž uzol (na šatku, tašku alebo šnúrku na ruke). Keď urobíš dobrý skutok, rozviaž ho a zapíš ho sem, stačí pár slov. Dobrovoľne, bez odmeny, s úsmevom a bez frflania. Pečať Uzol: aspoň 15 dní z 21.</p>
+<div class="cols"><table class="days"><tr><th>deň</th><th>dobrý skutok</th></tr><tr><td>5. 4. po</td><td style='width:70%'></td></tr><tr><td>6. 4. ut</td><td style='width:70%'></td></tr><tr><td>7. 4. st</td><td style='width:70%'></td></tr><tr><td>8. 4. št</td><td style='width:70%'></td></tr><tr><td>9. 4. pi</td><td style='width:70%'></td></tr><tr><td>10. 4. so</td><td style='width:70%'></td></tr><tr><td>11. 4. ne</td><td style='width:70%'></td></tr><tr><td>12. 4. po</td><td style='width:70%'></td></tr><tr><td>13. 4. ut</td><td style='width:70%'></td></tr><tr><td>14. 4. st</td><td style='width:70%'></td></tr><tr><td>15. 4. št</td><td style='width:70%'></td></tr></table>
+<table class="days"><tr><th>deň</th><th>dobrý skutok</th></tr><tr><td>16. 4. pi</td><td style='width:70%'></td></tr><tr><td>17. 4. so</td><td style='width:70%'></td></tr><tr><td>18. 4. ne</td><td style='width:70%'></td></tr><tr><td>19. 4. po</td><td style='width:70%'></td></tr><tr><td>20. 4. ut</td><td style='width:70%'></td></tr><tr><td>21. 4. st</td><td style='width:70%'></td></tr><tr><td>22. 4. št</td><td style='width:70%'></td></tr><tr><td>23. 4. pi</td><td style='width:70%'></td></tr><tr><td>24. 4. so</td><td style='width:70%'></td></tr><tr><td>25. 4. ne</td><td style='width:70%'></td></tr></table></div>
+</div><div class="half">
+<h1>Kadetská karta · strana 1 · Denný rozkaz (5. – 25. 4.)</h1>
+<p class="small"><b>Meno:</b> ______________________ &nbsp; <b>Odovzdať:</b> 26. 4. radcovi</p>
+<p class="small">Denný príkaz skauta: <b>Každý deň dobrý skutok!</b> Ráno si uviaž uzol (na šatku, tašku alebo šnúrku na ruke). Keď urobíš dobrý skutok, rozviaž ho a zapíš ho sem, stačí pár slov. Dobrovoľne, bez odmeny, s úsmevom a bez frflania. Pečať Uzol: aspoň 15 dní z 21.</p>
+<div class="cols"><table class="days"><tr><th>deň</th><th>dobrý skutok</th></tr><tr><td>5. 4. po</td><td style='width:70%'></td></tr><tr><td>6. 4. ut</td><td style='width:70%'></td></tr><tr><td>7. 4. st</td><td style='width:70%'></td></tr><tr><td>8. 4. št</td><td style='width:70%'></td></tr><tr><td>9. 4. pi</td><td style='width:70%'></td></tr><tr><td>10. 4. so</td><td style='width:70%'></td></tr><tr><td>11. 4. ne</td><td style='width:70%'></td></tr><tr><td>12. 4. po</td><td style='width:70%'></td></tr><tr><td>13. 4. ut</td><td style='width:70%'></td></tr><tr><td>14. 4. st</td><td style='width:70%'></td></tr><tr><td>15. 4. št</td><td style='width:70%'></td></tr></table>
+<table class="days"><tr><th>deň</th><th>dobrý skutok</th></tr><tr><td>16. 4. pi</td><td style='width:70%'></td></tr><tr><td>17. 4. so</td><td style='width:70%'></td></tr><tr><td>18. 4. ne</td><td style='width:70%'></td></tr><tr><td>19. 4. po</td><td style='width:70%'></td></tr><tr><td>20. 4. ut</td><td style='width:70%'></td></tr><tr><td>21. 4. st</td><td style='width:70%'></td></tr><tr><td>22. 4. št</td><td style='width:70%'></td></tr><tr><td>23. 4. pi</td><td style='width:70%'></td></tr><tr><td>24. 4. so</td><td style='width:70%'></td></tr><tr><td>25. 4. ne</td><td style='width:70%'></td></tr></table></div>
+</div></div>
+<div class="page"><div class="half">
+<h1>Kadetská karta · strana 2 · Kadet musí byť zdatný (5. 4. – 2. 5.)</h1>
+<p class="small"><b>Môj šport / pohyb:</b> ______________________________ &nbsp; <b>Odovzdať:</b> 3. 5.</p>
+<p class="small">Úloha V zdravom tele (príručka str. 54): aspoň 1 mesiac sa 2× týždenne venujem pohybu, ktorý ma baví. Každý tréning podpíše rodič alebo tréner.</p>
+<table><tr><th>týždeň</th><th>1. tréning (čo, koľko min)</th><th>podpis</th><th>2. tréning (čo, koľko min)</th><th>podpis</th></tr><tr><td>5. – 11. 4.</td><td></td><td></td><td></td><td></td></tr><tr><td>12. – 18. 4.</td><td></td><td></td><td></td><td></td></tr><tr><td>19. – 25. 4.</td><td></td><td></td><td></td><td></td></tr><tr><td>26. 4. – 2. 5.</td><td></td><td></td><td></td><td></td></tr></table>
+<p class="small" style="margin-top:3mm"><b>Švihadlo 1 minúta:</b> vstupný test 5. 4.: ______ &nbsp;&nbsp; výstupný test 3. 5.: ______ &nbsp;&nbsp; zlepšenie: ______</p>
+<p class="small">Ja, kadet ______________________, sľubujem, že budem 2× do týždňa ______________________.</p>
+</div><div class="half">
+<h1>Kadetská karta · strana 2 · Kadet musí byť zdatný (5. 4. – 2. 5.)</h1>
+<p class="small"><b>Môj šport / pohyb:</b> ______________________________ &nbsp; <b>Odovzdať:</b> 3. 5.</p>
+<p class="small">Úloha V zdravom tele (príručka str. 54): aspoň 1 mesiac sa 2× týždenne venujem pohybu, ktorý ma baví. Každý tréning podpíše rodič alebo tréner.</p>
+<table><tr><th>týždeň</th><th>1. tréning (čo, koľko min)</th><th>podpis</th><th>2. tréning (čo, koľko min)</th><th>podpis</th></tr><tr><td>5. – 11. 4.</td><td></td><td></td><td></td><td></td></tr><tr><td>12. – 18. 4.</td><td></td><td></td><td></td><td></td></tr><tr><td>19. – 25. 4.</td><td></td><td></td><td></td><td></td></tr><tr><td>26. 4. – 2. 5.</td><td></td><td></td><td></td><td></td></tr></table>
+<p class="small" style="margin-top:3mm"><b>Švihadlo 1 minúta:</b> vstupný test 5. 4.: ______ &nbsp;&nbsp; výstupný test 3. 5.: ______ &nbsp;&nbsp; zlepšenie: ______</p>
+<p class="small">Ja, kadet ______________________, sľubujem, že budem 2× do týždňa ______________________.</p>
+</div></div>
+</body></html>

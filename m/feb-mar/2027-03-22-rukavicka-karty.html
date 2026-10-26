@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Rukavička pod štítom – karty (22. 3. 2027)</title>
+<style>
+  @page { size: A4 landscape; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; margin: 0; }
+  .page { page-break-after: always; }
+  .plan { height: 186mm; border: 6px solid #000; display: flex; flex-direction: column; justify-content: space-between; padding: 6mm 10mm; text-align: center; }
+  .plan .t { font-size: 20pt; font-weight: bold; letter-spacing: 3px; }
+  .plan .row { display: flex; justify-content: space-around; align-items: center; }
+  .plan .cell { width: 30%; }
+  .plan .lab { font-size: 16pt; }
+  .plan .val { font-size: 70pt; font-weight: bold; line-height: 1.05; }
+  .plan .k { font-size: 11pt; }
+  h1 { font-size: 15pt; margin: 0 0 3mm; }
+  .note { font-size: 9.5pt; margin: 0 0 3mm; }
+  .g3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .h { border: 1px dashed #000; height: 58mm; padding: 4mm; font-size: 11pt; }
+  .h b { font-size: 13pt; }
+  .l { border-bottom: 1px solid #000; height: 9mm; }
+  table { border-collapse: collapse; width: 100%; font-size: 11pt; }
+  th, td { border: 1px solid #000; padding: 2mm; text-align: center; }
+  td.n { text-align: left; }
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script>
+// Plány útoku: jeden na kolo. Hodnoty sú vymyslené pre hru.
+const plany = [
+  {k:'1. KOLO', smer:'← ZÁPAD', jazda:'40', cas:'ÚSVIT'},
+  {k:'2. KOLO', smer:'SEVER ↑', jazda:'75', cas:'POLNOC'},
+  {k:'3. KOLO', smer:'VÝCHOD →', jazda:'120', cas:'POLUDNIE'},
+];
+let h = '';
+for (const p of plany) {
+  h += `<div class="page"><div class="plan">
+    <div class="t">TÁBOR PLUKOVNÍKA TEMPLA · PLÁN ÚTOKU · PRÍSNE TAJNÉ</div>
+    <div class="row">
+      <div class="cell"><div class="lab">SMER</div><div class="val">${p.smer}</div></div>
+      <div class="cell"><div class="lab">JAZDCOV</div><div class="val">${p.jazda}</div></div>
+      <div class="cell"><div class="lab">KEDY</div><div class="val" style="font-size:44pt">${p.cas}</div></div>
+    </div>
+    <div class="k">${p.k}</div>
+  </div></div>`;
+}
+const hl = `<div class="h"><b>HLÁSENIE ZVEDA PRE GENERÁLA</b><br>Tím: ____________ &nbsp; Kolo: ___<br>
+<div style="margin-top:3mm">Smer útoku:</div><div class="l"></div>
+<div>Počet jazdcov:</div><div class="l"></div>
+<div>Kedy:</div><div class="l"></div>
+<div style="font-size:9pt;margin-top:2mm">Tento lístok nesmie ostať v tábore. Inak je to stopa, −1.</div></div>`;
+h += `<div class="page"><h1>Hlásenia (9 lístkov = 3 tímy × 3 kolá)</h1><p class="note">Rozstrihať. Každý tím dostane na kolo jeden lístok a jednu ceruzku.</p><div class="g3">${hl.repeat(9)}</div></div>`;
+let rows = '';
+for (const t of ['Tím 1','Tím 2','Tím 3']) {
+  rows += `<tr><td class="n">${t}</td>` + '<td></td>'.repeat(15) + '<td></td></tr>';
+}
+let head = '';
+for (let k = 1; k <= 3; k++) head += `<th>${k}: plán (0–3)</th><th>${k}: rukavička (+2)</th><th>${k}: neviditeľní (+2)</th><th>${k}: stopy (−1)</th><th>${k}: spolu</th>`;
+h += `<div><h1>Bodovanie – Rukavička pod štítom (generál)</h1>
+<p class="note">Správne odpovede: 1. kolo ZÁPAD · 40 · ÚSVIT &nbsp;|&nbsp; 2. kolo SEVER · 75 · POLNOC &nbsp;|&nbsp; 3. kolo VÝCHOD · 120 · POLUDNIE (v 3. kole sa plán ráta, len ak boli na vrchu dvaja naraz).</p>
+<table style="font-size:8pt"><tr><th>Tím</th>${head}<th>CELKOM</th></tr>${rows}</table>
+<p class="note" style="margin-top:4mm">Porada po kole: Temple povie „Neboli ste tam!“, tím opíše, kde leží rukavička, Temple overí. Rukavička mimo štítu = stopa.</p></div>`;
+document.getElementById('out').innerHTML = h;
+</script>
+</body>
+</html>

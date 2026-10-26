@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regata posádok</title>
+<style>
+  /* Tlač: A3 naležato, mierka 100 %. Na A4 tlač s voľbou „Prispôsobiť stránke“ (vyjde 71 %).
+     Najlepšie zalaminovať a písať lihovkou alebo ceruzkou. */
+  @page { size: A3 landscape; margin: 0; }
+  :root { --ink: #1d1a16; --soft: #6b645a; --faint: #bdb5a6; --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif; --hand: "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: #d9cfba; color: var(--ink); font-family: var(--serif); font-size: 11pt; line-height: 1.3; }
+  .bar { background: #2b261f; color: #f4ecda; padding: 10px 16px; font: 14px/1.4 -apple-system, Arial, sans-serif; }
+  .wrap { padding: 20px 16px; overflow-x: auto; }
+  .sheet { width: 420mm; height: 297mm; margin: 0 auto; background: #fbf6ea; padding: 11mm 14mm 9mm; display: flex; flex-direction: column; gap: 5mm; overflow: hidden; box-shadow: 0 3px 14px rgba(0,0,0,.25); }
+  .rough { position: relative; }
+  .rough::before { content: ""; position: absolute; inset: 0; border: 1.5px solid var(--ink); border-radius: 3px 6px 2px 5px; filter: url(#rough); pointer-events: none; }
+
+  header { display: flex; align-items: center; gap: 8mm; }
+  header svg { width: 26mm; height: 26mm; flex: none; }
+  header .kicker { font-size: 9pt; letter-spacing: .25em; text-transform: uppercase; color: var(--soft); }
+  header h1 { margin: 0; font-weight: normal; font-size: 36pt; line-height: 1; }
+  header .sub { font-style: italic; color: var(--soft); }
+  header .stamps { margin-left: auto; display: flex; gap: 4mm; align-items: center; }
+  header .stamps svg { width: 13mm; height: 13mm; }
+
+  /* regata: tri dráhy po 10 bodov */
+  .race { padding: 4mm 5mm 3mm; }
+  .race .lab { display: flex; justify-content: space-between; font-size: 9pt; color: var(--soft); font-style: italic; margin-bottom: 2mm; }
+  .lane { display: grid; grid-template-columns: 34mm repeat(30, 1fr) 16mm; align-items: center; margin-bottom: 2mm; }
+  .lane .nm { font-size: 10pt; border-bottom: 1px dotted var(--ink); height: 7mm; margin-right: 3mm; display: flex; align-items: flex-end; color: var(--soft); font-style: italic; }
+  .lane i { height: 9mm; border: 1px solid var(--ink); border-left: 0; display: flex; align-items: flex-end; justify-content: flex-end; font-style: normal; font-size: 6pt; color: var(--soft); padding: 0 .6mm .3mm; }
+  .lane i:first-of-type { border-left: 1px solid var(--ink); }
+  .lane i.port { background: repeating-linear-gradient(45deg, transparent 0 1.6mm, #e2dbcc 1.6mm 2.2mm); }
+  .lane .goal { text-align: center; font-size: 8pt; line-height: 1.1; }
+  .lane .goal svg { width: 9mm; height: 9mm; display: block; margin: 0 auto; }
+
+  /* posádky */
+  .crews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6mm; }
+  .crew { padding: 4mm 4mm 3mm; }
+  .crew h2 { margin: 0 0 2mm; font-weight: normal; font-size: 13pt; display: flex; gap: 2mm; align-items: flex-end; }
+  .crew h2 span { flex: 1; border-bottom: 1px dotted var(--ink); height: 7mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  th { font-weight: normal; font-size: 7.5pt; color: var(--soft); padding: 0 0 1mm; text-align: center; }
+  th svg { width: 7mm; height: 7mm; display: block; margin: 0 auto .5mm; color: var(--ink); }
+  th:first-child { text-align: left; }
+  td { border: 1px solid var(--ink); height: 9.2mm; text-align: center; }
+  td.nm { width: 27%; text-align: left; padding-left: 2mm; color: var(--faint); font-style: italic; font-size: 8pt; }
+  td.sum { width: 13%; background: repeating-linear-gradient(45deg, transparent 0 1.6mm, #ebe5d8 1.6mm 2mm); }
+  tr.bonus td.nm { color: var(--ink); font-style: normal; font-size: 8.5pt; }
+  tr.total td { border-width: 2px; height: 10mm; }
+  tr.total td.nm { color: var(--ink); font-style: normal; font-weight: bold; font-size: 10pt; }
+  .tally { display: flex; flex-wrap: wrap; gap: 1.2mm; padding: 1mm 1.5mm; justify-content: flex-start; }
+  .tally b { width: 3.6mm; height: 3.6mm; border: 1px solid var(--soft); display: inline-block; }
+
+  /* pravidlá */
+  .rules { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 6mm; padding: 4mm 6mm; font-size: 10pt; margin-top: auto; }
+  .rules h3 { margin: 0 0 1.5mm; font-weight: normal; font-variant: small-caps; letter-spacing: .05em; font-size: 12.5pt; }
+  .rules table td { border: 0; border-bottom: 1px dotted var(--soft); text-align: left; height: auto; padding: 1mm 1mm; font-size: 9.5pt; }
+  .rules table td.n { text-align: right; font-weight: bold; font-size: 12pt; white-space: nowrap; }
+  .rules p, .rules ul { margin: 0 0 1.5mm; }
+  .rules ul { padding-left: 4.5mm; }
+  .rules li { margin-bottom: 1mm; }
+
+  @media print {
+    body { background: #fff; }
+    .bar { display: none; }
+    .wrap { padding: 0; overflow: visible; }
+    .sheet { box-shadow: none; background: #fff; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="5"/>
+      <feDisplacementMap in="SourceGraphic" scale="3"/>
+    </filter>
+    <symbol id="s1" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M5 27 H35 L31 32.5 H9 Z"/><path d="M20 4 V27"/><path d="M21.5 6 L32 25 H21.5 Z"/><path d="M18.5 9 L9.5 25 H18.5 Z"/>
+      <path d="M3 36.5 q3 -2 6 0 t6 0 t6 0 t6 0 t6 0 t5 0"/><path d="M20 4 l4 1.6 l-4 1.6"/></g></symbol>
+    <symbol id="s2" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+      <path d="M9 33 C4 20 9 7 20 7 C31 7 36 20 31 33 L25.5 33 C28 23 26 14 20 14 C14 14 12 23 14.5 33 Z"/></g>
+      <g fill="currentColor"><circle cx="9.6" cy="24" r="1"/><circle cx="11.2" cy="16.5" r="1"/><circle cx="15.6" cy="10.8" r="1"/><circle cx="24.4" cy="10.8" r="1"/><circle cx="28.8" cy="16.5" r="1"/><circle cx="30.4" cy="24" r="1"/></g></symbol>
+    <symbol id="s3" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M12 37 L12 23 L8.4 16 Q7.6 13 10 12.6 Q12 12.4 13.2 15 L15 19 L15 8 Q15 5.4 17 5.4 Q19 5.4 19 8 L19.2 17.5 L19.6 5 Q19.6 3 21.6 3 Q23.6 3 23.6 5 L23.5 17.5 L24 7 Q24 5 26 5 Q28 5 28 7 L27.6 19 L28.6 11.5 Q29 9.4 30.6 9.8 Q32.2 10.2 31.9 12.2 L30.2 26 Q29.4 32 27 37 Z"/>
+      <path d="M11 33.5 H28.4"/><path d="M15 25 q2 1.6 4 0"/></g></symbol>
+    <symbol id="s4" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <circle cx="9.5" cy="27" r="7"/><circle cx="30.5" cy="27" r="7"/><circle cx="9.5" cy="27" r="1" fill="currentColor"/><circle cx="30.5" cy="27" r="1" fill="currentColor"/>
+      <path d="M9.5 27 L16.5 16.5 H27.5 L30.5 27"/><path d="M16.5 16.5 L20 27 L27.5 16.5"/><path d="M20 27 H9.5"/>
+      <path d="M14 13.5 H19"/><path d="M16.5 13.5 V16.5"/><path d="M27.5 16.5 L26.4 11.5 L30 10.5"/></g></symbol>
+    <symbol id="s5" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M5.5 35 Q3 16 21 9 Q29 6 36 4 Q31 9.5 23.5 12.5 Q11 18.5 11.5 35 Z"/>
+      <path d="M5.5 35 H11.5"/><path d="M6 28 L11.3 27"/><path d="M6.6 21.5 L12.4 21.8"/><path d="M9.4 15.6 L14.6 17.6"/><path d="M14 11.5 L18.6 14.4"/><path d="M19.5 9.4 L23 12.4"/><path d="M25.5 7.6 L28 10.2"/></g></symbol>
+    <symbol id="flag" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M10 37 V4"/><path d="M10 5 H32 L27 11 L32 17 H10"/><path d="M5 37 H16"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="bar">Tabuľa bodov · tlač <b>A3 naležato</b>, mierka 100 %, bez okrajov. Na A4: „Prispôsobiť stránke“. Zalaminuj a píš lihovkou.</div>
+
+<div class="wrap">
+<div class="sheet">
+
+  <header>
+    <svg><use href="#s1"/></svg>
+    <div>
+      <div class="kicker">Po stopách Bí-Piho · 2026/27</div>
+      <h1>Regata posádok</h1>
+      <div class="sub">Ktorá loď dopláva prvá na ostrov Brownsea? Každá pečať v denníku = jeden bod pre posádku.</div>
+    </div>
+    <div class="stamps"><svg><use href="#s1"/></svg><svg><use href="#s2"/></svg><svg><use href="#s3"/></svg><svg><use href="#s4"/></svg><svg><use href="#s5"/></svg></div>
+  </header>
+
+  <section class="race rough">
+    <div class="lab"><span>Plavba: na konci každej schôdzky prefarbi toľko políčok, koľko má posádka spolu bodov. 1 políčko = 10 bodov.</span><span>Šrafované políčka sú prístavy: tam by ste mali byť na konci etapy 1–4.</span></div>
+    <div id="lanes"></div>
+  </section>
+
+  <section class="crews" id="crews"></section>
+
+  <section class="rules rough">
+    <div>
+      <h3>Body</h3>
+      <table>
+        <tr><td>Pečať za splnenú úlohu Prvého skauta (aj dobehnutú)</td><td class="n">+1</td></tr>
+        <tr><td>Odomknutý diel mapy: chalan má všetky pečate etapy (do tabuľky krúžok ○ okolo čísla)</td><td class="n">+2</td></tr>
+        <tr><td><b>Plná posádka:</b> diel tej istej etapy odomkli všetci členovia posádky</td><td class="n">+3</td></tr>
+        <tr><td><b>Bonus dňa:</b> výhra hlavnej hry, fair-play alebo pomoc inej posádke. Najviac 1 za schôdzku, dáva radca, ktorý ju vedie</td><td class="n">+1</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Ako zapisovať</h3>
+      <ul>
+        <li>Do políčka etapy píš <b>počet pečatí</b> chalana. Keď pribudne, prepíš číslo.</li>
+        <li>Keď má chalan celú etapu (13 · 4 · 3 · 11 · 6; v etape 5 sa úlohy „ak sa dá“ nerátajú), zakrúžkuj číslo: to je +2.</li>
+        <li>Bonus dňa a Plnú posádku odškrtávaj v ich riadku, každé políčko je jeden bonus.</li>
+        <li><b>Spolu</b> = všetky pečate + 2 × krúžky + 3 × plné posádky + bonusy dňa. Raz za mesiac prepočíta radca.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Férovka a cieľ</h3>
+      <ul>
+        <li>Body sa <b>nikdy neberú</b>. Úlohu možno dobehnúť a pečať platí aj neskôr.</li>
+        <li>Menšia posádka: na konci každej etapy jej za chýbajúceho člena pripíšeme priemer pečatí na člena (nadol).</li>
+        <li>Body sa zbierajú do <b>finále na družinovej noci</b>. Kto pred finále vedie, dostane jednu indíciu navyše.</li>
+        <li><b>Finále:</b> 1. miesto +15, 2. +10, 3. +5. Víťaza regaty vyhlásime na konci noci.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script>
+// dráhy regaty: 30 políčok po 10 bodoch; prístavy = očakávaný stav po etapách 1–4 pri 4–5 členoch
+const PORTS = [7, 9, 11, 18];
+const lanes = document.getElementById('lanes');
+for (let r = 0; r < 3; r++) {
+  let h = `<div class="lane"><div class="nm">posádka ${r + 1}</div>`;
+  for (let c = 1; c <= 30; c++) h += `<i class="${PORTS.includes(c) ? 'port' : ''}">${c % 5 === 0 ? c * 10 : ''}</i>`;
+  h += `<div class="goal"><svg><use href="#flag"/></svg>Brownsea</div></div>`;
+  lanes.insertAdjacentHTML('beforeend', h);
+}
+// tabuľky posádok: 6 riadkov na členov, bonusy, spolu
+const crews = document.getElementById('crews');
+const ET = [["s1", "1 · /13"], ["s2", "2 · /4"], ["s3", "3 · /3"], ["s4", "4 · /11"], ["s5", "5 · /9"]];
+for (let r = 0; r < 3; r++) {
+  let t = `<div class="crew rough"><h2>Posádka ${r + 1}:<span></span></h2><table><tr><th>člen posádky</th>${ET.map(([s, l]) => `<th><svg><use href="#${s}"/></svg>${l}</th>`).join('')}<th>spolu</th></tr>`;
+  for (let m = 0; m < 6; m++) t += `<tr><td class="nm">meno</td>${'<td></td>'.repeat(5)}<td class="sum"></td></tr>`;
+  t += `<tr class="bonus"><td class="nm">Plná posádka (+3)</td>${'<td><div class="tally"><b></b></div></td>'.repeat(5)}<td class="sum"></td></tr>`;
+  t += `<tr class="bonus"><td class="nm">Bonus dňa (+1)</td><td colspan="5"><div class="tally">${'<b></b>'.repeat(30)}</div></td><td class="sum"></td></tr>`;
+  t += `<tr class="total"><td class="nm">SPOLU</td><td colspan="5"></td><td class="sum"></td></tr></table></div>`;
+  crews.insertAdjacentHTML('beforeend', t);
+}
+</script>
+</body>
+</html>

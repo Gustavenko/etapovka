@@ -1,0 +1,238 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8"><title>Karty jún 2027</title>
+<style>
+@page { size: A4 portrait; margin: 10mm; }
+* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; color:#000; background:#fff; margin:0; font-size:10pt; }
+.page { width:190mm; min-height:275mm; page-break-after: always; position:relative; }
+.page:last-child { page-break-after: auto; }
+.hd { font-size:8pt; border-bottom:1px solid #000; margin-bottom:3mm; padding-bottom:1mm; }
+h2 { font-size:13pt; margin:0 0 2mm; }
+h3 { font-size:11pt; margin:0 0 1.5mm; }
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:0; }
+.grid4 { display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:0; }
+.card { border:1px dashed #000; padding:4mm; }
+.a6 { height:130mm; }
+.a7 { height:66mm; }
+.a8 { height:33mm; }
+.line { border-bottom:1px solid #000; height:6.5mm; }
+.small { font-size:8.5pt; }
+.label { border:1px solid #000; padding:2mm 1mm; text-align:center; font-weight:bold; font-size:10pt; }
+ol, ul { margin:1mm 0 1mm 5mm; padding:0; }
+li { margin-bottom:1mm; }
+.tmpl { border:1px dashed #000; padding:3mm; margin-bottom:4mm; }
+@media screen { body { background:#eee; } .page { background:#fff; margin:5mm auto; padding:5mm; box-shadow:0 0 3px #999; } }
+</style></head><body>
+
+<!-- STRANA 1: šablóna kopca (7. 6.) -->
+<div class="page">
+<div class="hd">Strana 1 · 7. 6. Kopec z toastov · vytlač 2× (4 šablóny = 3 tímy + rezerva)</div>
+<div id="tmpl"></div>
+</div>
+
+<!-- STRANA 2: karta Môj úsek -->
+<div class="page">
+<div class="hd">Strana 2 · Družinový výlet 12. 6. · karta „Môj úsek“ · vytlač 2× (pre 6–8 dvojíc), strihaj po čiarach</div>
+<div class="grid2" id="usek"></div>
+</div>
+
+<!-- STRANA 3: kartička na doma 7. 6. -->
+<div class="page">
+<div class="hd">Strana 3 · 7. 6. kartička na doma · 8 ks na stranu, vytlač 2×</div>
+<div class="grid2" id="doma7"></div>
+</div>
+
+<!-- STRANA 4: štítky noža (14. 6.) -->
+<div class="page">
+<div class="hd">Strana 4 · 14. 6. Nožiarska dielňa · opakovanie z výpravy 15. 5. (pečať Majster noža len pre toho, kto ju 15. 5. nedostal) · 3 sady štítkov, strihaj po čiarach · časti noža podľa príručky str. 68</div>
+<div id="noz"></div>
+<div class="card" style="margin-top:4mm">
+<h3>Pre radcu: opakovanie / dobehnutie Majstra noža (45 s na chalana)</h3>
+<p class="small">Úloha (str. 70): <i>Radcovi alebo rodičovi vysvetlím základné typy nožov, ich časti a využitie.</i> Ukáž na jeden nôž a jednu časť a spýtaj sa: „Čo je to za nôž? Na čo ho použiješ? Ako sa volá toto?“</p>
+<table style="border-collapse:collapse;width:100%" class="small">
+<tr><th style="border:1px solid #000;text-align:left;padding:1mm">Typ (str. 68)</th><th style="border:1px solid #000;text-align:left;padding:1mm">Na čo</th></tr>
+<tr><td style="border:1px solid #000;padding:1mm">Multifunkčný nôž („švajčiarák“)</td><td style="border:1px solid #000;padding:1mm">drobné práce, veľa funkcií, malý a ľahký</td></tr>
+<tr><td style="border:1px solid #000;padding:1mm">Otvárací nôž</td><td style="border:1px solid #000;padding:1mm">vyrezávanie, menšie práce, krájanie jedla, dobre sa nosí</td></tr>
+<tr><td style="border:1px solid #000;padding:1mm">Dýka s pevnou čepeľou</td><td style="border:1px solid #000;padding:1mm">hrubá práca s drevom, krájanie jedla</td></tr>
+</table>
+<p class="small" style="margin-top:2mm">Na čo nôž <b>nie</b> (str. 70): páčenie, skrutky, otváranie konzerv, zapichovanie do zeme, štiepanie s kladivom.</p>
+<p class="small">Meno / ✓ ________________________________________________________________________________</p>
+</div>
+</div>
+
+<!-- STRANA 5: kartička na doma 14. 6. -->
+<div class="page">
+<div class="hd">Strana 5 · 14. 6. kartička na doma k zborovému táboru a družinovej noci · 4 ks na stranu, vytlač 4×</div>
+<div class="grid2" id="doma14"></div>
+</div>
+
+<!-- STRANA 6: Tajný rozkaz (21. 6.) -->
+<div class="page">
+<div class="hd">Strana 6 · 21. 6. Tajný rozkaz · do malej obálky · 8 ks na stranu, vytlač 2×</div>
+<div class="grid2" id="rozkaz"></div>
+</div>
+
+<!-- STRANA 7: List na oheň -->
+<div class="page">
+<div class="hd">Strana 7 · 21. 6. List na oheň · do veľkej obálky C6 · 4 ks na stranu, vytlač 4×</div>
+<div class="grid2" id="list"></div>
+</div>
+
+<!-- STRANA 8: losovanie + karta Na tábor -->
+<div class="page">
+<div class="hd">Strana 8 · 21. 6. hore: lístky s menami na losovanie strážcov (16 ks, mená dopíš rukou) · dole: karta „Na tábor“ z colnice (4 ks, vytlač 3×)</div>
+<div class="grid4" id="mena"></div>
+<div class="grid2" id="natabor" style="margin-top:4mm"></div>
+</div>
+
+<!-- STRANA 9: Mapa a drevorubačský tábor (12. 6.) -->
+<div class="page">
+<div class="hd">Strana 9 · Družinový výlet 12. 6. · drevorubačský tábor na obede · vytlač 1× (radcom), kritériá mapy 3× (jedno na tím)</div>
+<div id="mapa9"></div>
+<div class="card small" style="margin-top:4mm">
+<h3>Pečate na obede · kto čo potvrdzuje</h3>
+<table style="border-collapse:collapse;width:100%">
+<tr><th style="border:1px solid #000;text-align:left;padding:1mm;width:22%">Pečať (str.)</th><th style="border:1px solid #000;text-align:left;padding:1mm">Čo musí chalan urobiť</th><th style="border:1px solid #000;text-align:left;padding:1mm;width:22%">Potvrdí</th></tr>
+<tr><td style="border:1px solid #000;padding:1mm"><b>Mapa</b> (67)</td><td style="border:1px solid #000;padding:1mm">nakreslí mapu miesta obeda s legendou (aspoň 6 značiek), severkou a vrstevnicami a vysvetlí ju radcovi</td><td style="border:1px solid #000;padding:1mm">radca 2</td></tr>
+<tr><td style="border:1px solid #000;padding:1mm"><b>Drevorubač*</b> (77)</td><td style="border:1px solid #000;padding:1mm">osekal konár, podieľal sa na prerúbaní kmeňa, pílil sám aj vo dvojici a vie, ako sa nosí a odkladá sekera a píla</td><td style="border:1px solid #000;padding:1mm">dospelý / rover pri sekere</td></tr>
+<tr><td style="border:1px solid #000;padding:1mm"><b>Štiepky*</b> (77)</td><td style="border:1px solid #000;padding:1mm">rozrúbe vlastný klát až na podpal (polienka, triesky, tenké štiepky)</td><td style="border:1px solid #000;padding:1mm">dospelý / rover pri sekere</td></tr>
+<tr><td style="border:1px solid #000;padding:1mm"><b>Varúj!*</b> (77)</td><td style="border:1px solid #000;padding:1mm">len ak je suchý strom s povolením: povie postup, zakričí „VARÚJ!“, stojí bokom, nie za kmeňom, po páde zamaskuje peň. Hlavný rez robí dospelý.</td><td style="border:1px solid #000;padding:1mm">vedúci</td></tr>
+</table>
+<p style="margin-top:2mm">* úloha s hviezdičkou: len pod dozorom radcu, staršieho rovera alebo vodcu. Ak sa na mieste rúbať nedá, pečate s hviezdičkou sa presúvajú na jesennú výpravu, mapa ostáva.</p>
+<p>Meno · Mapa · Drevorubač · Štiepky · Varúj!</p>
+<div id="riadky9"></div>
+</div>
+</div>
+
+<!-- STRANA 10: Lekárska vizita (21. 6.) -->
+<div class="page">
+<div class="hd">Strana 10 · 21. 6. Lekárska vizita · ťahák pre radcov („lodných lekárov“) · vytlač 3×</div>
+<div class="card small">
+<h3>Ťahák: kde je orgán a čo robí</h3>
+<table style="border-collapse:collapse;width:100%" id="organy"></table>
+<p style="margin-top:2mm"><b>Ako na vizitu:</b> ukáž na model a spýtaj sa na 2 orgány: „Čo je toto? Na čo to máme?“ Stačí jednou vetou vlastnými slovami. Ak nevie, tím smie po prvom pokuse napovedať. Potom pečať Ľudské telo (str. 55).</p>
+</div>
+<div class="card small" style="margin-top:4mm">
+<h3>Vizita · záznam</h3>
+<p>Meno · orgán 1 · orgán 2 · ✓</p>
+<div id="riadky10"></div>
+</div>
+</div>
+
+<!-- STRANA 11: karty tímov k Ľudskému telu + pľúca vo fľaši -->
+<div class="page">
+<div class="hd">Strana 11 · 21. 6. Obor z Brownsea · hore 4 karty tímov (3 + rezerva, strihaj), dole návod na pľúca vo fľaši</div>
+<div class="grid2" id="obor"></div>
+<div class="card small" style="margin-top:4mm">
+<h3>Pľúca vo fľaši (mechanický bonus)</h3>
+<p><b>Treba:</b> PET fľaša 1,5 l s odrezaným dnom (hrany olepené páskou, robí radca vopred), 2 balóny, 1 rúrka zo slamky alebo hadičky v tvare Y (dve slamky zlepené páskou), plastelína, gumička.</p>
+<ol>
+<li>Na konce slamiek navleč 2 balóny a prilep páskou, aby nešiel vzduch. To sú pľúca, slamky sú priedušky.</li>
+<li>Slamky prestrč hrdlom do fľaše tak, aby balóny viseli vo vnútri. Hrdlo utesni plastelínou.</li>
+<li>Tretí balón rozstrihni a natiahni cez odrezané dno, pripevni gumičkou. To je bránica.</li>
+<li>Potiahni bránicu dole: balóny sa nafúknu (nádych). Pusti: splasnú (výdych).</li>
+</ol>
+<p><b>Čo to ukazuje:</b> pľúca samy nedýchajú, ťahá ich bránica pod nimi. Preto pri Dýchaj! (str. 79) pomáha tlak pod rebrami.</p>
+</div>
+</div>
+
+<script>
+function rep(id, n, html){ var e=document.getElementById(id), s=''; for(var i=0;i<n;i++) s+=html; e.innerHTML=s; }
+
+// šablóna kopca: 4 vrstevnice, hustejšie na východe (vpravo) = strmý svah
+var svg = '<svg width="100mm" height="100mm" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="display:block">'
+ + '<rect x="0.3" y="0.3" width="99.4" height="99.4" fill="none" stroke="#000" stroke-width="0.3" stroke-dasharray="1.5,1.5"/>'
+ + '<ellipse cx="50" cy="50" rx="46" ry="40" fill="none" stroke="#000" stroke-width="0.6"/>'
+ + '<ellipse cx="58" cy="50" rx="34" ry="30" fill="none" stroke="#000" stroke-width="0.6"/>'
+ + '<ellipse cx="66" cy="50" rx="22" ry="20" fill="none" stroke="#000" stroke-width="0.6"/>'
+ + '<ellipse cx="72" cy="50" rx="10" ry="10" fill="none" stroke="#000" stroke-width="0.6"/>'
+ + '<text x="5" y="52" font-size="3.5">1</text><text x="25" y="52" font-size="3.5">2</text><text x="45" y="52" font-size="3.5">3</text><text x="69" y="52" font-size="3.5">4</text>'
+ + '<line x1="2" y1="94" x2="98" y2="94" stroke="#000" stroke-width="0.3"/><text x="2" y="98" font-size="3">Z (západ)</text><text x="84" y="98" font-size="3">V (východ)</text>'
+ + '<text x="46" y="7" font-size="4" font-weight="bold">S ↑</text>'
+ + '</svg>';
+var prof = '<svg width="80mm" height="30mm" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">'
+ + '<polyline points="2,28 18,22 34,16 50,10 60,4 66,10 70,16 74,22 78,28" fill="none" stroke="#000" stroke-width="0.6"/>'
+ + '<line x1="0" y1="28.5" x2="80" y2="28.5" stroke="#000" stroke-width="0.3"/>'
+ + '<text x="1" y="5" font-size="3">Z</text><text x="75" y="5" font-size="3">V</text></svg>';
+var t = '<div class="tmpl"><div style="display:flex;gap:5mm;align-items:flex-start">' + svg
+ + '<div class="small" style="width:80mm"><h3>Kopec z toastov</h3><ol>'
+ + '<li>Vystrihni celý štvorec. Je veľký ako toast.</li>'
+ + '<li>Vystrihni vrstevnicu 1, priložíš ju na toast a tupým nožom vykroj tvar. Potom 2 na ďalší toast, potom 3 a 4.</li>'
+ + '<li>Ulož najväčšiu dole, potom ďalšie. Medzi vrstvy daj nátierku. Severka musí na všetkých vrstvách ukazovať rovnako!</li>'
+ + '<li>Kde sú čiary blízko seba, tam je svah strmý.</li></ol>'
+ + '<p><b>Profil od radcu (prierez Z → V):</b></p>' + prof
+ + '<p>Sedí váš kopec s profilom? Strmá strana musí byť na tej istej strane.</p></div></div></div>';
+rep('tmpl', 2, t);
+
+var u = '<div class="card a6 small"><h3>Môj úsek · Družinový výlet 12. 6.</h3>'
+ + '<p>Úsek č. ____ &nbsp; Vedú: ______________ a ______________</p>'
+ + '<p><b>Štart:</b> ____________________ → <b>Cieľ:</b> ____________________</p>'
+ + '<p>Značka (farba): ________ &nbsp; Odbočujeme pri: ____________________</p>'
+ + '<p><b>Dĺžka:</b> ___ cm na mape × mierka = ___ km</p>'
+ + '<p><b>Stúpanie:</b> ___ vrstevníc × ___ m = ___ m &nbsp; Najstrmšie pri: ____________</p>'
+ + '<p><b>Čas:</b> ___ min (podľa tabule / turistickamapa.sk)</p>'
+ + '<p><b>Ukážeme družine:</b> ____________________</p><p>Čo o tom povieme: ___________________________________________</p>'
+ + '<p>_________________________________________________________</p>'
+ + '<p><b>Skratka, keby pršalo:</b> ____________________</p>'
+ + '<p><b>Pitie po:</b> ___ min &nbsp; <b>Kde sa dá skončiť:</b> ________________</p>'
+ + '<p><b>Na štarte povieme:</b> „Ideme na ____, po ____ značke, ___ km, ___ minút, cestou ukážeme ____.“</p>'
+ + '<p style="margin-top:3mm">Skontroloval radca: ____________</p></div>';
+rep('usek', 4, u);
+
+var d7 = '<div class="card a7 small"><b>Sobota 12. 6.: Družinový výlet</b><br>Zraz o ____ pri ______________, návrat o ____ pri ______________.<br>'
+ + '<b>TOP 10:</b> nôž · baterka · náhradné tričko a ponožky · KPZ · toaletný papier · fľaša s vodou (1,5 l) · pršiplášť · lekárnička · celta · lano.<br>'
+ + 'K tomu jedlo na celý deň, kartičku poistenca a <b>podpísaný súhlas rodiča</b>.<br>Kto vedie úsek, prinesie kartu „Môj úsek“.</div>';
+rep('doma7', 8, d7);
+
+var parts = ['hrot','čepeľ','ostrie','chrbát čepele','falošné ostrie','zášťita','rukoväť','hlavica','vybranie pre ukazovák','výbrus pre čepeľ','oblúk čepele','priama časť čepele'];
+var n='';
+for (var k=0;k<3;k++){ n+='<div class="grid4" style="margin-bottom:3mm">'; for (var i=0;i<parts.length;i++) n+='<div class="label">'+parts[i]+'</div>'; n+='</div>'; }
+document.getElementById('noz').innerHTML=n;
+
+var d14 = '<div class="card a6 small"><h3>Na zborový tábor a družinovú noc si zbaľ</h3>'
+ + '<p><b>TOP 10:</b> nôž · baterka · náhradné tričko a ponožky · KPZ · toaletný papier · fľaša s vodou · pršiplášť · lekárnička · celta · lano</p>'
+ + '<p>Dnes mi chýbalo: __________________________________</p>'
+ + '<ul><li><b>Rovnošata so šatkou</b> na nástupy, čisté jednofarebné nohavice</li>'
+ + '<li><b>Spacák a karimatka</b> na družinovú noc vonku</li>'
+ + '<li><b>Nôž</b> len vtedy, ak to zbor na tábore dovolí (povie radca): podpísaný, v puzdre. Sekeru ani pílu nenos.</li>'
+ + '<li>pevná obuv, pokrývka hlavy, opaľovací krém, baterka na nočnú hru</li>'
+ + '<li><b>Bí-Piho denník</b> a príručka Prvý skaut s checklistom</li></ul>'
+ + '<p><b>Rodičia:</b> tábor organizuje zbor. Naša družina na ňom bude mať jednu družinovú noc s ohňom a nočnou hrou, vždy pod dozorom vedúceho. Ak niečo nesmie, prosím povedzte vedúcemu.</p>'
+ + '<p><b>Domáca úloha na 21. 6.:</b> prines 3 veci na model tela (fazuľa, špagát, slamky, šiška…).</p>'
+ + '<p>Podpis rodiča: ______________________</p></div>';
+rep('doma14', 4, d14);
+
+var r = '<div class="card a7 small" style="text-align:center"><b>TAJNÝ ROZKAZ Z BROWNSEA · otvor v prvý deň tábora</b><br><br>'
+ + 'Počas celého tábora potajme strážiš brata:<br><span style="font-size:13pt;font-weight:bold">____________________</span><br><br>'
+ + 'Každý deň pre neho urob aspoň jeden dobrý skutok tak, aby nezistil, že si to ty. Nikomu nehovor, koho strážiš.<br>'
+ + 'Na družinovej noci bude hádať. — B.-P.</div>';
+rep('rozkaz', 8, r);
+
+var l = '<div class="card a6 small"><h3>List na oheň</h3><p>Píšem sám sebe. Otvorím ho až na družinovej noci.</p>'
+ + '<p><b>Na tábore chcem dokázať:</b></p><p>1. _____________________________________</p><p>2. _____________________________________</p><p>3. _____________________________________</p>'
+ + '<p><b>Trochu sa bojím:</b> ________________________________</p>'
+ + '<p><b>Najviac sa teším na:</b> ____________________________</p>'
+ + '<p style="margin-top:6mm">Meno: _______________ &nbsp; Dátum: 21. 6. 2027</p></div>';
+rep('list', 4, l);
+
+rep('mena', 16, '<div class="card a8" style="text-align:center;padding-top:10mm">__________________</div>');
+
+var nt = '<div class="card a7 small"><b>Na tábor · čo ešte dobehnúť</b> (colnica 21. 6.)<br>Meno: ______________________<br>'
+ + '1. __________________________ (str. ___)<br>2. __________________________ (str. ___)<br>3. __________________________ (str. ___)<br>'
+ + 'Dobehne sa: na tábore (ak sa dá) alebo na jesennej výprave. &nbsp; Colník: __________</div>';
+rep('natabor', 4, nt);
+var m9 = '<div class="card small" style="margin-bottom:2mm"><b>Mapa miesta obeda · tím ____</b> &nbsp; Treba mať: '
+ + '☐ severka &nbsp; ☐ mierka (krokovanie: 2 kroky ≈ 1,5 m) &nbsp; ☐ legenda, aspoň 6 značiek (ohnisko, drevo, stan/celta, voda, chodník, strom) &nbsp; '
+ + '☐ vrstevnice, aspoň 2 (kde stúpa svah) &nbsp; ☐ hranica územia &nbsp; ☐ kde smie stáť čakáreň pri sekere &nbsp; ☐ každý vie vysvetliť 3 značky</div>';
+rep('mapa9', 3, m9);
+rep('riadky9', 14, '<div class="line"></div>');
+rep('riadky10', 14, '<div class="line"></div>');
+var org = [['mozog','hlava','riadi celé telo, myslí, pamätá si'],['miecha','v chrbtici','vedie príkazy z mozgu do tela'],['srdce','hrudník, trochu vľavo','pumpuje krv po tele'],['pľúca','hrudník, dve','berú zo vzduchu kyslík a dávajú von oxid uhličitý'],['priedušnica','krk pred pažerákom','vedie vzduch do pľúc'],['pažerák','krk za priedušnicou','vedie jedlo do žalúdka'],['žalúdok','brucho hore vľavo','rozkladá jedlo kyselinou'],['pečeň','brucho hore vpravo','čistí krv od jedov, robí žlč'],['tenké črevo','stred brucha, niekoľko metrov','vstrebáva živiny z jedla'],['hrubé črevo','okolo tenkého čreva','berie z jedla vodu, ostatné ide von'],['obličky','vzadu pri chrbtici, dve','čistia krv, robia moč'],['močový mechúr','dole v panve','zbiera moč'],['kostra','celé telo','drží tvar, chráni orgány (lebka, rebrá)'],['svaly','celé telo','hýbu kosťami, srdce je tiež sval']];
+var ot='<tr><th style="border:1px solid #000;padding:1mm;text-align:left">orgán</th><th style="border:1px solid #000;padding:1mm;text-align:left">kde</th><th style="border:1px solid #000;padding:1mm;text-align:left">čo robí</th></tr>';
+for (var i=0;i<org.length;i++) ot+='<tr><td style="border:1px solid #000;padding:1mm"><b>'+org[i][0]+'</b></td><td style="border:1px solid #000;padding:1mm">'+org[i][1]+'</td><td style="border:1px solid #000;padding:1mm">'+org[i][2]+'</td></tr>';
+document.getElementById('organy').innerHTML=ot;
+var ob='<div class="card small" style="height:66mm"><b>OBOR Z BROWNSEA · tím ____</b><br>Vyrobte a prilepte na obrys. Ku každému štítok: čo robí.<br><br>';
+for (var i=0;i<org.length;i++) ob+='☐ '+org[i][0]+(i%2?'<br>':' &nbsp;&nbsp; ');
+ob+='<br>Bonus: ☐ pľúca vo fľaši (návod dole)</div>';
+rep('obor', 4, ob);
+</script>
+</body></html>

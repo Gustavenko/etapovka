@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Bazár v Bombaji – karty (8. 2. 2027)</title>
+<style>
+  @page { size: A4; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; margin: 0; font-size: 10pt; }
+  h1 { font-size: 14pt; margin: 0 0 2mm; }
+  .note { font-size: 9pt; margin: 0 0 3mm; }
+  .page { page-break-after: always; }
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; }
+  .c { border: 1px dashed #000; height: 24mm; padding: 2mm; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+  .c b { font-size: 12pt; }
+  .c small { font-size: 7.5pt; text-transform: uppercase; letter-spacing: .5px; }
+  .p { border: 1px dashed #000; height: 132mm; padding: 5mm; font-size: 10pt; }
+  .p h2 { font-size: 12pt; margin: 0 0 3mm; }
+  .l { border-bottom: 1px solid #000; height: 8mm; margin-bottom: 1mm; }
+  .lab { font-size: 9pt; margin-top: 2mm; }
+  .t { border: 1px dashed #000; height: 34mm; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+  .t b { font-size: 16pt; }
+  .t small { font-size: 8pt; }
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script>
+const kat = {
+  'Príroda': ['Botanik','Bylinkár','Geológ','Herpetológ','Hubár','Hvezdár','Chovateľ','Lesník','Meteorológ','Ochranca prírody','Ornitológ','Rybár','Speleológ','Stopár','Táborník','Včelár','Záhradkár','Zálesák','Zoológ'],
+  'Zručnosti': ['Archeológ','Cukrár','Fyzik','Gamer','Genealóg','Geocacher','Historik','Hráč spoločenských hier','Chemik','Informatik','Kuchár','Kutil','Matematik','Modelár','Orientácia','Práca s drevom','Ručné práce','Smartfónista','Sociálne siete','Viazanie','Zberateľ'],
+  'Šport': ['Atlét','Basketbalista','Bedmintonista','Cyklista','Florbalista','Futbalista','Hokejista','Jazdec','Korčuliar','Lezec','Lukostrelec','Lyžiar','Plavec','Silové športy','Skialpinista','Stolnotenista','Športovec','Turista','Ultimate frisbee','Vodná turistika','Volejbalista'],
+  'Umenie a kultúra': ['Cestovateľ','Čitateľ','Filmár','Folklorista','Fotograf','Herec','Hudobník','Kronikár','Kultúra','Pútnik','Rozprávkar','Slovenčinár','Spevák','Spisovateľ','Tanečník spoločenských tancov','Výtvarník'],
+  'Dobrovoľníctvo a občianstvo': ['Babysitter','Koledník','Hygienik','Miništrant','Novinár','Občan','Občan Európskej únie','Oddielový hospodár','Oddielový tajomník','Organizátor hier','Prvá pomoc','Právnik','Skautská história','Sprievodca','Svetové priateľstvo','Tlmočník a prekladateľ','Zahraničný skauting','Znalec náboženstiev'],
+};
+const stanky = [
+  ['Stánok 1 (radca 1)', ['Príroda']],
+  ['Stánok 2 (radca 2)', ['Zručnosti','Šport']],
+  ['Stánok 3 (radca 3)', ['Umenie a kultúra','Dobrovoľníctvo a občianstvo']],
+];
+let h = '';
+for (const [n, ks] of stanky) {
+  h += `<div class="page"><h1>Karty odboriek · ${n}</h1><p class="note">Zoznam podľa skauting.sk (skautské a rangerské odborky, stav október 2026). Podmienky číta kupec z mobilu, na kartách nie sú.</p><div class="g4">`;
+  for (const k of ks) for (const o of kat[k]) h += `<div class="c"><b>${o}</b><small>${k}</small></div>`;
+  h += `</div></div>`;
+}
+// pantomíma
+const pant = ['Včelár','Hubár','Rybár','Speleológ','Hvezdár','Lukostrelec','Plavec','Lyžiar','Kuchár','Cukrár','Gamer','Smartfónista','Fotograf','Spevák','Tanečník spoločenských tancov','Lezec','Cyklista','Korčuliar','Jazdec','Babysitter','Hokejista','Zoológ','Herec','Geocacher'];
+h += `<div class="page"><h1>Odborková pantomíma – lístky (radca 2)</h1><p class="note">Rozstrihať, zamiešať. Bežec si vytiahne jeden a predvedie ho tímu bez slov a bez zvukov.</p><div class="g4">`;
+for (const o of pant) h += `<div class="c"><b>${o}</b></div>`;
+h += `</div></div>`;
+// plán odborky
+const plan = `<div class="p"><h2>Plán výpravy za odborkou · Bombaj 2027</h2>
+<div class="lab">Meno:</div><div class="l"></div>
+<div class="lab">Na bazáre som kúpil (3 odborky):</div><div class="l"></div>
+<div class="lab"><b>Moja odborka</b> a stupeň:</div><div class="l"></div>
+<div class="lab">Prečo práve táto (jedna veta):</div><div class="l"></div>
+<div class="lab">Tri prvé kroky z podmienok: 1.</div><div class="l"></div>
+<div class="lab">2.</div><div class="l"></div>
+<div class="lab">3.</div><div class="l"></div>
+<div class="lab">Prvý krok urobím do (dátum): ________ &nbsp; Potvrdí mi: ______________</div>
+<div class="lab">Čo potrebujem (vec, človek, miesto):</div><div class="l"></div>
+<div class="lab">Podpis radcu (Obľúbená odborka, str. 62): ______________</div></div>`;
+h += `<div class="page"><div class="g2">${plan.repeat(4)}</div></div>`;
+// bazárové karty
+const tovar = [['Čaj','2 body'],['Korenie','3 body'],['Hodváb',''],['Ryža',''],['Bavlna',''],['Mango',''],['Kokos',''],['Šafran',''],['Indigo',''],['Banány',''],['Kardamón',''],['Ďumbier',''],['Juta',''],['Kurkuma','']];
+h += `<div><h1>Bazárová horúčka – karty tovaru</h1><p class="note">Každý tovar 4×. Použiť toľko druhov, koľko je hráčov (pri 11 hráčoch prvých 11 druhov). Čaj a korenie vždy. Ostatné po 1 bode.</p><div class="g4">`;
+for (const [t, b] of tovar) for (let i = 0; i < 4; i++) h += `<div class="t"><b>${t}</b><small>${b || '1 bod'}</small></div>`;
+h += `</div></div>`;
+document.getElementById('out').innerHTML = h;
+</script>
+</body>
+</html>
