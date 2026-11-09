@@ -6,7 +6,7 @@
   var t = iso(today);
   var next = window.PLAN.find(function (p) { return p.d >= t; });
   document.querySelectorAll(".card[data-date]").forEach(function (c) {
-    if (c.dataset.date < t) c.classList.add("past");
+    if (c.dataset.date && c.dataset.date < t) c.classList.add("past");
     if (next && c.getAttribute("href") === next.u) c.classList.add("is-next");
   });
   if (!next) return;
@@ -56,3 +56,18 @@
     draw(rows.reduce(function (a, b) { return a + b; }, 0), rows.filter(Boolean).pop());
   }).catch(function () {});
 })();
+
+// Pri „Správa rodičom“ tlačidlo, ktoré skopíruje text na WhatsApp.
+document.querySelectorAll(".doc h2").forEach(function (h) {
+  if (!/^Správa rodičom/.test(h.textContent)) return;
+  var parts = [], n = h.nextElementSibling;
+  while (n && n.tagName !== "H2") { parts.push(n); n = n.nextElementSibling; }
+  var text = parts.map(function (e) { return e.innerText.trim(); }).join("\n\n");
+  if (!text) return;
+  var b = document.createElement("button");
+  b.className = "print copy"; b.type = "button"; b.textContent = "📋 Kopírovať pre WhatsApp";
+  b.onclick = function () {
+    navigator.clipboard.writeText(text).then(function () { b.textContent = "✓ Skopírované"; setTimeout(function () { b.textContent = "📋 Kopírovať pre WhatsApp"; }, 2000); });
+  };
+  h.appendChild(b);
+});

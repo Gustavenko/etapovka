@@ -141,3 +141,6 @@ th { background: var(--paper); }
 @media (max-width: 560px) { .lean .doc h2 { margin-left: -12px; margin-right: -12px; padding: 8px 12px; } }
 .lean .doc ol li { margin: 4px 0; }
 @media print { .lean .doc h2 { margin: 14px 0 6px; padding: 4px 0; background: none; } .lod { display: none; } }
+.doc h2 .copy { display: block; margin-top: 8px; font-size: 15px; font-family: "Source Sans 3", system-ui, sans-serif; }
+@media print { .copy { display: none; } }
+.c-date.wrap { white-space: normal; line-height: 1.2; }
